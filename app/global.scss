@@ -1,0 +1,18 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Dank Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo,
+    Courier, monospace;
+  font-size: 21px;
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
+  line-height: 1.5;
+  margin: 0;
+  background-color: rgb(203, 242, 251);
+}

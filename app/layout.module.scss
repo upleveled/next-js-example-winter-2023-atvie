@@ -1,0 +1,30 @@
+.header {
+  nav {
+    background-color: #ddd;
+    border-radius: 6px;
+    margin: 20px 0;
+    padding: 15px;
+    display: flex;
+
+    & a + a,
+    span + a {
+      margin-left: 13px;
+    }
+
+    & div {
+      margin-right: auto;
+      display: flex;
+      gap: 6px;
+    }
+  }
+}
+
+.footer {
+  background-color: #ddd;
+  border-radius: 6px;
+  margin: 20px 0;
+  display: flex;
+  margin-top: 20px;
+  padding: 15px;
+  border-top: 2px solid var(--main-bg-color);
+}
