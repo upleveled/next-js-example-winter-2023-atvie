@@ -1,0 +1,13 @@
+diff --git a/node_modules/next/dist/client/components/router-reducer/should-hard-navigate.js b/node_modules/next/dist/client/components/router-reducer/should-hard-navigate.js
+index 150a5fd..a55803f 100644
+--- a/node_modules/next/dist/client/components/router-reducer/should-hard-navigate.js
++++ b/node_modules/next/dist/client/components/router-reducer/should-hard-navigate.js
+@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
+ exports.shouldHardNavigate = shouldHardNavigate;
+ var _matchSegments = require("../match-segments");
+ function shouldHardNavigate(flightSegmentPath, flightRouterState) {
++    return true;
+     const [segment, parallelRoutes] = flightRouterState;
+     // TODO-APP: Check if `as` can be replaced.
+     const [currentSegment, parallelRouteKey] = flightSegmentPath;
+diff --git a/node_modules/next/dist/client/components/router-reducer/should-hard-navigate.js b/node_modules/next/dist/client/components/router-reducer/should-hard-navigate.js\nindex 150a5fd..a55803f 100644\n--- a/node_modules/next/dist/client/components/router-reducer/should-hard-navigate.js\n+++ b/node_modules/next/dist/client/components/router-reducer/should-hard-navigate.js\n@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {\n exports.shouldHardNavigate = shouldHardNavigate;\n var _matchSegments = require("../match-segments");\n function shouldHardNavigate(flightSegmentPath, flightRouterState) {\n+    return true;\n     const [segment, parallelRoutes] = flightRouterState;\n     // TODO-APP: Check if `as` can be replaced.\n     const [currentSegment, parallelRouteKey] = flightSegmentPath;
