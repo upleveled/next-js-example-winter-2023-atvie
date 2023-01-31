@@ -10,6 +10,8 @@ import { animals } from '../../../database/animals';
 //   { id: 5, firstName: 'Karl', type: 'llama', accessory: 'hat' },
 // ];
 
+export const dynamic = 'force-dynamic';
+
 export default function AnimalPage({ params }) {
   const singleAnimal = animals.find((animal) => {
     return animal.firstName.toLowerCase() === params.animalName;
