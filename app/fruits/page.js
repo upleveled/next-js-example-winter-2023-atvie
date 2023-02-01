@@ -3,8 +3,10 @@ import Link from 'next/link';
 import { fruits } from '../../database/fruits';
 
 export default function FruitsPage() {
+  // get the cookie from the server
   const fruitsCookie = cookies().get('fruitsCookie');
 
+  // create a default value if cooke doesn't exist
   let fruitsCookieParsed = [];
 
   if (fruitsCookie) {

@@ -10,7 +10,7 @@ import Fruit from './Fruit';
 // ];
 
 // we add this only if we have no dynamic function as cookies or headers
-// export const dynamic = 'force-dynamic';
+export const dynamic = 'force-dynamic';
 
 export default function FruitPage({ params }) {
   const singleFruit = fruits.find((fruit) => {
