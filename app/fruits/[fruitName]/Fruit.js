@@ -11,29 +11,28 @@ export default function Fruit(props) {
       <p>{props.fruit.icon}</p>
       <button
         onClick={() => {
-          // I get the cookie
+          // get the cookie
           const fruitsInCookies = getParsedCookie('fruitsCookie');
-
-          // if there is no cookie we initialize the value with a 1
 
           if (!fruitsInCookies) {
             // if there is no cookie function stop here
             return;
           }
 
+          // try to find the fruit inside of the cookies
           const foundFruit = fruitsInCookies.find((fruitInCookie) => {
             return fruitInCookie.id === props.fruit.id;
           });
 
-          // my fruit is inside of the cookie
+          // my fruit is not inside of the cookie
           if (foundFruit) {
+            // update the cookie with the new values
             foundFruit.stars--;
-
+            // if there is a negative value set number to 0
             if (foundFruit.stars < 0) {
               foundFruit.stars = 0;
             }
-            // my fruit is not inside of the cookie
-            // update the cookie with the new values
+            // Update the cookie after transformation
             setStringifiedCookie('fruitsCookie', fruitsInCookies);
           }
         }}
@@ -42,12 +41,12 @@ export default function Fruit(props) {
       </button>
       <button
         onClick={() => {
-          // I get the cookie
+          // get the cookie
           const fruitsInCookies = getParsedCookie('fruitsCookie');
 
           // if there is no cookie we initialize the value with a 1
-
           if (!fruitsInCookies) {
+            // create the cookie with a new object for the fruit
             setStringifiedCookie('fruitsCookie', [
               { id: props.fruit.id, stars: 1 },
             ]);
@@ -61,13 +60,15 @@ export default function Fruit(props) {
 
           // my fruit is inside of the cookie
           if (foundFruit) {
+            // Add a start to the foundFruit
             foundFruit.stars++;
             // my fruit is not inside of the cookie
           } else {
+            // Add a the fruit to the array of fruits in cookies
             fruitsInCookies.push({ id: props.fruit.id, stars: 1 });
           }
 
-          // update the cookie with the new values
+          // Update the cookie after transformation
           setStringifiedCookie('fruitsCookie', fruitsInCookies);
         }}
       >
