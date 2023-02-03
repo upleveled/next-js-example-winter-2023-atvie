@@ -1349,6 +1349,13 @@
     pg-connection-string "^2.5.0"
     postgres "^3.3.0"
 
+"@types/dotenv-safe@^8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@types/dotenv-safe/-/dotenv-safe-8.1.2.tgz#72f126969f445af5654efd3167deabc2cbc6c24e"
+  integrity sha512-R/B/wIMda6lRE2P1H0vwSoJsV78IOkhccE4vIvmKZQNXOIjiU0QyJsUXwSotBxOPZFZ/oOnjCa3+kK5kVJwGyw==
+  dependencies:
+    dotenv "^8.2.0"
+
 "@types/eslint@8.4.10":
   version "8.4.10"
   resolved "https://registry.yarnpkg.com/@types/eslint/-/eslint-8.4.10.tgz#19731b9685c19ed1552da7052b6f668ed7eb64bb"
@@ -2238,6 +2245,18 @@ doctrine@^3.0.0:
   integrity sha512-yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w==
   dependencies:
     esutils "^2.0.2"
+
+dotenv-safe@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/dotenv-safe/-/dotenv-safe-8.2.0.tgz#8d548c7318a62c09a66c4dc8c31864cc007c78ba"
+  integrity sha512-uWwWWdUQkSs5a3mySDB22UtNwyEYi0JtEQu+vDzIqr9OjbDdC2Ip13PnSpi/fctqlYmzkxCeabiyCAOROuAIaA==
+  dependencies:
+    dotenv "^8.2.0"
+
+dotenv@^8.2.0:
+  version "8.6.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.6.0.tgz#061af664d19f7f4d8fc6e4ff9b584ce237adcb8b"
+  integrity sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==
 
 electron-to-chromium@^1.4.284:
   version "1.4.284"
@@ -4409,7 +4428,7 @@ postcss@^7.0.26:
     picocolors "^0.2.1"
     source-map "^0.6.1"
 
-postgres@^3.3.0, postgres@^3.3.2:
+postgres@^3.3.0, postgres@^3.3.2, postgres@^3.3.3:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/postgres/-/postgres-3.3.3.tgz#f7a394c2edbcfd8ade96921676dccd0d45a1a757"
   integrity sha512-FGLZOpZSXePRIQu6LJpJUDikzuhplWI80uyyfmKBiljpfO+Z4nuClwpq3/dsRnitxVDsgFN5duJ7eUTaC0meQQ==

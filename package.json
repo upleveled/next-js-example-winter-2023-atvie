@@ -11,10 +11,13 @@
   },
   "dependencies": {
     "@next/font": "13.1.6",
+    "@types/dotenv-safe": "^8.1.2",
     "@types/js-cookie": "^3.0.2",
+    "dotenv-safe": "^8.2.0",
     "js-cookie": "^3.0.1",
     "next": "13.1.6",
     "patch-package": "^6.5.1",
+    "postgres": "^3.3.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sass": "^1.57.1",

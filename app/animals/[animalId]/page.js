@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { animals } from '../../../database/animals';
+import { getAnimal } from '../../../database/animals';
 
 // export const animals = [
 //   { id: 1, firstName: 'Dodo', type: 'turtle', accessory: 'scope' },
@@ -12,12 +12,9 @@ import { animals } from '../../../database/animals';
 
 export const dynamic = 'force-dynamic';
 
-export default function AnimalPage({ params }) {
-  const singleAnimal = animals.find((animal) => {
-    return animal.firstName.toLowerCase() === params.animalName;
-  });
+export default async function AnimalPage({ params }) {
+  const singleAnimal = await getAnimal(params.animalId);
 
-  console.log(singleAnimal);
   if (!singleAnimal) {
     // throw new Error('this action is not allowed with Error id: 213123123');
     notFound();

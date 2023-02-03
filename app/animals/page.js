@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { animals } from '../../database/animals';
+import { getAnimals } from '../../database/animals';
 
-export default function AnimalsPage() {
+export default async function AnimalsPage() {
+  const animals = await getAnimals();
+
   return (
     <>
       <h1>Animals</h1>
@@ -10,10 +12,10 @@ export default function AnimalsPage() {
         {animals.map((animal) => {
           return (
             <div key={animal.id}>
-              <Link href={`/animals/${animal.firstName.toLocaleLowerCase()}`}>
+              <Link href={`/animals/${animal.id}`}>
                 <h2>{animal.firstName}</h2>
               </Link>
-              <Link href={`/animals/${animal.firstName.toLocaleLowerCase()}`}>
+              <Link href={`/animals/${animal.id}`}>
                 <Image
                   src={`/images/${animal.firstName}-${animal.id}.jpg`}
                   alt={animal.type}
