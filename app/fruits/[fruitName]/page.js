@@ -9,6 +9,21 @@ import Fruit from './Fruit';
 //   { id: 5, name: 'Avocado', icon: '🥑' },
 // ];
 
+// eslint-disable-next-line require-await
+export async function generateMetadata({ params }) {
+  const singleFruit = fruits.find((fruit) => {
+    return fruit.name.toLowerCase() === params.fruitName;
+  });
+
+  return {
+    title: `${singleFruit.name} | AnimalsRUs`,
+    description: `Single animal page for ${singleFruit.name}`,
+    icons: {
+      shortcut: '/favicon.ico',
+    },
+  };
+}
+
 // we add this only if we have no dynamic function as cookies or headers
 export const dynamic = 'force-dynamic';
 

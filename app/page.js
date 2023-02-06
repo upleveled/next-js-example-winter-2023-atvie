@@ -3,6 +3,10 @@ import alpaca from '../public/images/alpaca.webp';
 import GenerateButton from './GenerateButton';
 import styles from './page.module.scss';
 
+export const metadata = {
+  description: 'This is my Home Page',
+};
+
 export default function HomePage() {
   return (
     <>
