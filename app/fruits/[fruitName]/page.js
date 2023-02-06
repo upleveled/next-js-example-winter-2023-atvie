@@ -1,4 +1,6 @@
+import { notFound } from 'next/navigation';
 import { fruits } from '../../../database/fruits';
+import { rootNotFoundMetadata } from '../../not-found';
 import Fruit from './Fruit';
 
 // export const fruits = [
@@ -14,6 +16,10 @@ export async function generateMetadata({ params }) {
   const singleFruit = fruits.find((fruit) => {
     return fruit.name.toLowerCase() === params.fruitName;
   });
+
+  if (!singleFruit) {
+    return rootNotFoundMetadata;
+  }
 
   return {
     title: `${singleFruit.name} | AnimalsRUs`,
@@ -31,6 +37,10 @@ export default function FruitPage({ params }) {
   const singleFruit = fruits.find((fruit) => {
     return fruit.name.toLowerCase() === params.fruitName;
   });
+
+  if (!singleFruit) {
+    notFound();
+  }
 
   return <Fruit fruit={singleFruit} />;
 }
