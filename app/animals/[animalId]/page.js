@@ -1,11 +1,16 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getAnimalById } from '../../../database/animals';
+import { animalNotFoundMetadata } from './not-found';
 
 export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(props) {
   const singleAnimal = await getAnimalById(props.params.animalId);
+
+  if (!singleAnimal) {
+    return animalNotFoundMetadata;
+  }
 
   return {
     title: `${singleAnimal.firstName} | AnimalsRUs`,

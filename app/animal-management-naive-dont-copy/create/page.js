@@ -6,6 +6,11 @@ export default async function UpdateAnimalPage(props) {
     props.searchParams.type,
     props.searchParams.accessory,
   );
+
+  if (!animal) {
+    throw new Error('this action failed with Error id: 213123123');
+  }
+
   return (
     <div>
       <h1>animal with id {animal.id} has been created</h1>
