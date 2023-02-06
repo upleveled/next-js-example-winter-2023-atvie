@@ -20,20 +20,94 @@ type Animal = {
 // get all animals
 export const getAnimals = cache(async () => {
   const animals = await sql<Animal[]>`
-  SELECT * FROM animals
+    SELECT * FROM animals
   `;
 
   return animals;
 });
 
 // get a single animal
-export const getAnimal = cache(async (id: number) => {
+export const getAnimalById = cache(async (id: number) => {
   const [animal] = await sql<Animal[]>`
     SELECT
       *
     FROM
       animals
-    WHERE id = ${id}
+    WHERE
+      id = ${id}
+  `;
+  return animal;
+});
+
+type AnimalWithFoods = {
+  animalId: number;
+  animalFirstName: string;
+  animalType: string;
+  animalAccessory: string | null;
+  foodId: number;
+  foodName: string;
+  foodType: string;
+};
+
+export const getAnimalByIdWithFoods = cache(async (id: number) => {
+  const animalsWithFoods = await sql<AnimalWithFoods[]>`
+    SELECT
+      animals.id AS animal_id,
+      animals.first_name AS animal_first_name,
+      animals.type AS animal_type,
+      animals.accessory AS animal_accessory,
+      foods.id AS food_id,
+      foods.name AS food_name,
+      foods.type AS food_type
+    FROM
+      animals
+    INNER JOIN
+      animals_foods ON animals.id = animals_foods.animal_id
+    INNER JOIN
+      foods ON animals_foods.food_id = foods.id
+    WHERE
+      animals.id = ${id}
+  `;
+  return animalsWithFoods;
+});
+
+export const createAnimal = cache(
+  async (firstName: string, type: string, accessory: string) => {
+    const [animal] = await sql<Animal[]>`
+      INSERT INTO animals
+        (first_name, type, accessory)
+      VALUES
+        (${firstName}, ${type}, ${accessory})
+      RETURNING *
+    `;
+    return animal;
+  },
+);
+
+export const updateAnimalById = cache(
+  async (id: number, firstName: string, type: string, accessory: string) => {
+    const [animal] = await sql<Animal[]>`
+      UPDATE
+        animals
+      SET
+        first_name = ${firstName},
+        type = ${type},
+        accessory = ${accessory}
+      WHERE
+        id = ${id}
+      RETURNING *
+    `;
+    return animal;
+  },
+);
+
+export const deleteAnimalById = cache(async (id: number) => {
+  const [animal] = await sql<Animal[]>`
+    DELETE FROM
+      animals
+    WHERE
+      id = ${id}
+    RETURNING *
   `;
   return animal;
 });

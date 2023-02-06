@@ -1,5 +1,5 @@
 diff --git a/node_modules/next/dist/client/components/router-reducer/should-hard-navigate.js b/node_modules/next/dist/client/components/router-reducer/should-hard-navigate.js
-index 150a5fd..8ccb52f 100644
+index 150a5fd..327be1c 100644
 --- a/node_modules/next/dist/client/components/router-reducer/should-hard-navigate.js
 +++ b/node_modules/next/dist/client/components/router-reducer/should-hard-navigate.js
 @@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { getAnimalById } from '../../../database/animals';
+import { getAnimalById } from '../../../../database/animals';
 
 export const dynamic = 'force-dynamic';
 
