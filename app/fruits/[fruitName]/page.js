@@ -23,7 +23,7 @@ export async function generateMetadata({ params }) {
 
   return {
     title: singleFruit.name,
-    description: `Single animal page for ${singleFruit.name}`,
+    description: `Single fruit page for ${singleFruit.name}`,
   };
 }
 
