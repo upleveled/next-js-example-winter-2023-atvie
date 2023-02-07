@@ -4,6 +4,7 @@ import {
   getAnimalById,
   getAnimalByIdWithFoods as getAnimalsByIdWithFoods,
 } from '../../../../database/animals';
+import { getAnimalWithFoods } from '../../../../utils/dataStructure';
 
 export const dynamic = 'force-dynamic';
 
@@ -22,24 +23,16 @@ export async function generateMetadata(props) {
 export default async function AnimalWithFoodsPage(props) {
   const animalsWithFoods = await getAnimalsByIdWithFoods(props.params.animalId);
 
+  console.log(animalsWithFoods);
+
   if (!animalsWithFoods[0]) {
     // throw new Error('this action is not allowed with Error id: 213123123');
     notFound();
   }
 
-  const animalWithFoods = {
-    id: animalsWithFoods[0].animalId,
-    firstName: animalsWithFoods[0].animalFirstName,
-    type: animalsWithFoods[0].animalType,
-    accessory: animalsWithFoods[0].animalAccessory,
-    foods: animalsWithFoods.map((food) => {
-      return {
-        id: food.foodId,
-        name: food.foodName,
-        type: food.foodType,
-      };
-    }),
-  };
+  const animalWithFoods = getAnimalWithFoods(animalsWithFoods);
+
+  console.log(animalWithFoods);
 
   return (
     <>
