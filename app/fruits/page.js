@@ -2,6 +2,11 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { fruits } from '../../database/fruits';
 
+export const metadata = {
+  title: 'Fruits',
+  description: 'This is my Fruits Page',
+};
+
 export default function FruitsPage() {
   // get the cookie from the server
   const fruitsCookie = cookies().get('fruitsCookie');

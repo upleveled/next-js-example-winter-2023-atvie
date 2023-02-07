@@ -1,4 +1,6 @@
+import { notFound } from 'next/navigation';
 import { fruits } from '../../../database/fruits';
+import { rootNotFoundMetadata } from '../../not-found';
 import Fruit from './Fruit';
 
 // export const fruits = [
@@ -9,6 +11,22 @@ import Fruit from './Fruit';
 //   { id: 5, name: 'Avocado', icon: '🥑' },
 // ];
 
+// eslint-disable-next-line require-await
+export async function generateMetadata({ params }) {
+  const singleFruit = fruits.find((fruit) => {
+    return fruit.name.toLowerCase() === params.fruitName;
+  });
+
+  if (!singleFruit) {
+    return rootNotFoundMetadata;
+  }
+
+  return {
+    title: singleFruit.name,
+    description: `Single fruit page for ${singleFruit.name}`,
+  };
+}
+
 // we add this only if we have no dynamic function as cookies or headers
 export const dynamic = 'force-dynamic';
 
@@ -16,6 +34,10 @@ export default function FruitPage({ params }) {
   const singleFruit = fruits.find((fruit) => {
     return fruit.name.toLowerCase() === params.fruitName;
   });
+
+  if (!singleFruit) {
+    notFound();
+  }
 
   return <Fruit fruit={singleFruit} />;
 }
