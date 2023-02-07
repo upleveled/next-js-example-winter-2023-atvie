@@ -2,6 +2,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getAnimals } from '../../../database/animals';
 
+export const metadata = {
+  description: 'Get all animals',
+};
+
 export default async function AnimalsPage() {
   const animals = await getAnimals();
 
