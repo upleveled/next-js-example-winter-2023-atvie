@@ -1,5 +1,9 @@
 import { createAnimal } from '../../../database/animals';
 
+export const metadata = {
+  description: 'Create a new animal',
+};
+
 export default async function UpdateAnimalPage(props) {
   const animal = await createAnimal(
     props.searchParams.firstName,

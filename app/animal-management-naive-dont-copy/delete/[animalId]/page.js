@@ -1,5 +1,9 @@
 import { deleteAnimalById } from '../../../../database/animals';
 
+export const metadata = {
+  description: 'Delete a animal',
+};
+
 export default async function DeleteAnimalPage(props) {
   const animal = await deleteAnimalById(props.params.animalId);
 

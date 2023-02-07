@@ -11,11 +11,8 @@ export async function generateMetadata(props) {
   const singleAnimal = await getAnimalById(props.params.animalId);
 
   return {
-    title: `${singleAnimal.firstName} | AnimalsRUs`,
+    title: singleAnimal.firstName,
     description: `Single animal page for ${singleAnimal.firstName}`,
-    icons: {
-      shortcut: '/favicon.ico',
-    },
   };
 }
 

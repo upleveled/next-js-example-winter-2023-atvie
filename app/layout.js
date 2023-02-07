@@ -4,7 +4,13 @@ import CookieBanner from './CookieBanner';
 import styles from './layout.module.scss';
 
 export const metadata = {
-  title: { default: 'UpLeveled Next.js Example', template: '%s | UpLeveled' },
+  title: {
+    default: 'animals4everyone',
+    template: '%s | animals4everyone',
+  },
+  icons: {
+    shortcut: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({ children }) {

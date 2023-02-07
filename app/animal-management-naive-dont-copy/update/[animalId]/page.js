@@ -1,5 +1,9 @@
 import { updateAnimalById } from '../../../../database/animals';
 
+export const metadata = {
+  description: 'Update a single animal',
+};
+
 export default async function UpdateAnimalPage(props) {
   const animal = await updateAnimalById(
     props.params.animalId,

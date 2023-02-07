@@ -22,11 +22,8 @@ export async function generateMetadata({ params }) {
   }
 
   return {
-    title: `${singleFruit.name} | AnimalsRUs`,
+    title: singleFruit.name,
     description: `Single animal page for ${singleFruit.name}`,
-    icons: {
-      shortcut: '/favicon.ico',
-    },
   };
 }
 
