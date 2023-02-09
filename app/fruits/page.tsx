@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { fruits } from '../../database/fruits';
+import { CookieValue } from '../../utils/cookies';
 
 export const metadata = {
   title: 'Fruits',
@@ -12,7 +13,7 @@ export default function FruitsPage() {
   const fruitsCookie = cookies().get('fruitsCookie');
 
   // create a default value if cooke doesn't exist
-  let fruitsCookieParsed = [];
+  let fruitsCookieParsed: CookieValue = [];
 
   if (fruitsCookie) {
     fruitsCookieParsed = JSON.parse(fruitsCookie.value);

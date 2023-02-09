@@ -5,8 +5,8 @@ import { animalNotFoundMetadata } from './not-found';
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata(props) {
-  const singleAnimal = await getAnimalById(props.params.animalId);
+export async function generateMetadata(props: Props) {
+  const singleAnimal = await getAnimalById(parseInt(props.params.animalId));
 
   if (!singleAnimal) {
     return animalNotFoundMetadata;
@@ -18,8 +18,14 @@ export async function generateMetadata(props) {
   };
 }
 
-export default async function AnimalPage(props) {
-  const singleAnimal = await getAnimalById(props.params.animalId);
+type Props = {
+  params: {
+    animalId: string;
+  };
+};
+
+export default async function AnimalPage(props: Props) {
+  const singleAnimal = await getAnimalById(parseInt(props.params.animalId));
 
   if (!singleAnimal) {
     // throw new Error('this action is not allowed with Error id: 213123123');
