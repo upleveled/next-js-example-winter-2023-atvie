@@ -8,15 +8,15 @@ import {
 // This is closest to what we want in unit tests
 // testing a single, small function that doesn't depend on a library
 test('stringify a cookie value', () => {
-  expect(stringifyCookieValue([{ id: '1', stars: 2 }])).toBe(
-    '[{"id":"1","stars":2}]',
+  expect(stringifyCookieValue([{ id: 1, stars: 2 }])).toBe(
+    '[{"id":1,"stars":2}]',
   );
 });
 
 test('set, gets and delete a cookie', () => {
   const cookie = {
     key: 'fruitsCookie',
-    value: [{ id: '1', stars: 2 }],
+    value: [{ id: 1, stars: 2 }],
   };
   // First, make sure that the return value of the function is undefined
   // Use .toBe to compare primitive values or to check referential identity of object instances

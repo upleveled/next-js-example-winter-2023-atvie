@@ -25,10 +25,10 @@ export function setStringifiedCookie(key: string, value: CookieValue) {
   Cookies.set(key, JSON.stringify(value));
 }
 
-export function deleteCookie(key) {
+export function deleteCookie(key: string) {
   Cookies.remove(key);
 }
 
-export function stringifyCookieValue(value) {
+export function stringifyCookieValue(value: CookieValue) {
   return JSON.stringify(value);
 }
