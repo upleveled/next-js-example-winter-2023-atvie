@@ -13,7 +13,11 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+type Props = {
+  children: React.ReactNode;
+};
+
+export default function RootLayout(props: Props) {
   return (
     <html lang="en">
       <head />
@@ -28,7 +32,7 @@ export default function RootLayout({ children }) {
             </div>
           </nav>
         </header>
-        {children}
+        {props.children}
         <footer className={styles.footer}>
           copyright animals4everyone 2023
         </footer>

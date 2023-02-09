@@ -1,10 +1,14 @@
 'use client';
 
+import { Fruit } from '../../../database/fruits';
 import { getParsedCookie, setStringifiedCookie } from '../../../utils/cookies';
 
 // fruitsCookie = [ {id: number, stars: number  },  ]
+type Props = {
+  fruit: Fruit;
+};
 
-export default function Fruit(props) {
+export default function SingleFruit(props: Props) {
   return (
     <div>
       <h2>{props.fruit.name}</h2>

@@ -4,11 +4,16 @@ import {
   getAnimalById,
   getAnimalByIdWithFoods as getAnimalsByIdWithFoods,
 } from '../../../../database/animals';
+import { animalNotFoundMetadata } from '../../[animalId]/not-found';
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata(props) {
-  const singleAnimal = await getAnimalById(props.params.animalId);
+export async function generateMetadata(props: Props) {
+  const singleAnimal = await getAnimalById(parseInt(props.params.animalId));
+
+  if (!singleAnimal) {
+    return animalNotFoundMetadata;
+  }
 
   return {
     title: singleAnimal.firstName,
@@ -16,8 +21,16 @@ export async function generateMetadata(props) {
   };
 }
 
-export default async function AnimalWithFoodsPage(props) {
-  const animalsWithFoods = await getAnimalsByIdWithFoods(props.params.animalId);
+type Props = {
+  params: {
+    animalId: string;
+  };
+};
+
+export default async function AnimalWithFoodsPage(props: Props) {
+  const animalsWithFoods = await getAnimalsByIdWithFoods(
+    parseInt(props.params.animalId),
+  );
 
   if (!animalsWithFoods[0]) {
     // throw new Error('this action is not allowed with Error id: 213123123');

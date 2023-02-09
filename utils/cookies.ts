@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 
 // more robust way to get items from cookies without parsing all the time
-export function getParsedCookie(key) {
+export function getParsedCookie(key: string): CookieValue | undefined {
   const cookieValue = Cookies.get(key);
 
   if (!cookieValue) {
@@ -15,7 +15,12 @@ export function getParsedCookie(key) {
   }
 }
 
+export type CookieValue = {
+  id: number;
+  stars: number;
+}[];
+
 // more robust way to set items to set the cookie without stringify all the time
-export function setStringifiedCookie(key, value) {
+export function setStringifiedCookie(key: string, value: CookieValue) {
   Cookies.set(key, JSON.stringify(value));
 }

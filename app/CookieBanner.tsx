@@ -20,19 +20,19 @@ export default function CookieBanner() {
     setAreCookiesTermsAccepted(initialState);
   }, []);
 
-  return (
-    !areCookiesTermsAccepted && (
-      <>
-        <div>This is the cookie Police. Please accept terms and conditions</div>
-        <button
-          onClick={() => {
-            setAreCookiesTermsAccepted(true);
-            setLocalStorage('areCookiesTermsAccepted', true);
-          }}
-        >
-          Accept
-        </button>
-      </>
-    )
+  return areCookiesTermsAccepted ? (
+    <div />
+  ) : (
+    <>
+      <div>This is the cookie Police. Please accept terms and conditions</div>
+      <button
+        onClick={() => {
+          setAreCookiesTermsAccepted(true);
+          setLocalStorage('areCookiesTermsAccepted', true);
+        }}
+      >
+        Accept
+      </button>
+    </>
   );
 }
