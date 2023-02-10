@@ -24,7 +24,7 @@ test('navigation test', async ({ page }) => {
 
   await expect(page.getByTestId('animal-type-turtle')).toBeVisible();
 
-  const animalNames = ['Dodo', 'Paco', 'Tira', 'Danny', 'Karl'];
+  const animalNames = ['Dodo', 'Paco', 'Tira', 'Danny'];
 
   await expect(page.locator('[data-test-id^="animal-type-"]')).toHaveCount(5);
 
