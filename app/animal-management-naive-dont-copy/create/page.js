@@ -1,5 +1,7 @@
 import { createAnimal } from '../../../database/animals';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   description: 'Create a new animal',
 };

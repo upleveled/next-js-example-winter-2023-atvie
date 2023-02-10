@@ -4,6 +4,7 @@ import {
   getAnimalById,
   getAnimalByIdWithFoods as getAnimalsByIdWithFoods,
 } from '../../../../database/animals';
+import { getAnimalWithFoods } from '../../../../utils/dataStructure';
 import { animalNotFoundMetadata } from '../../[animalId]/not-found';
 
 export const dynamic = 'force-dynamic';
@@ -37,19 +38,7 @@ export default async function AnimalWithFoodsPage(props: Props) {
     notFound();
   }
 
-  const animalWithFoods = {
-    id: animalsWithFoods[0].animalId,
-    firstName: animalsWithFoods[0].animalFirstName,
-    type: animalsWithFoods[0].animalType,
-    accessory: animalsWithFoods[0].animalAccessory,
-    foods: animalsWithFoods.map((food) => {
-      return {
-        id: food.foodId,
-        name: food.foodName,
-        type: food.foodType,
-      };
-    }),
-  };
+  const animalWithFoods = getAnimalWithFoods(animalsWithFoods);
 
   return (
     <>

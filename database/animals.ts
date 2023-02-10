@@ -39,7 +39,7 @@ export const getAnimalById = cache(async (id: number) => {
   return animal;
 });
 
-type AnimalWithFoods = {
+export type AnimalWithFoods = {
   animalId: number;
   animalFirstName: string;
   animalType: string;

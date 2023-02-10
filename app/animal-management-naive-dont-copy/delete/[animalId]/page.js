@@ -1,5 +1,7 @@
 import { deleteAnimalById } from '../../../../database/animals';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   description: 'Delete a animal',
 };

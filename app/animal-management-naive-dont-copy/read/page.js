@@ -2,6 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getAnimals } from '../../../database/animals';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   description: 'Get all animals',
 };
