@@ -17,6 +17,8 @@ type Props = {
   children: React.ReactNode;
 };
 
+export const dynamic = 'force-dynamic';
+
 export default function RootLayout(props: Props) {
   const randomNumber = Math.floor(Math.random() * 10);
 
