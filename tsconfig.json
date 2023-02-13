@@ -11,13 +11,5 @@
     "**/*.mjs",
     ".next/types/**/*.ts",
     "next-env.d.ts"
-  ],
-  "compilerOptions": {
-    "jsx": "preserve",
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
-  }
+  ]
 }

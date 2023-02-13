@@ -2,15 +2,14 @@
 const config = {
   extends: [
     'stylelint-config-recommended',
-    'stylelint-config-styled-components',
     'stylelint-config-recommended-scss',
     'stylelint-config-css-modules',
-    'stylelint-config-prettier',
   ],
   rules: {
     'no-descending-specificity': null,
     // Allow files without any styles
     'no-empty-source': null,
+    'no-extra-semicolons': null,
   },
   overrides: [
     {
@@ -22,8 +21,7 @@ const config = {
         '**/*.ts',
         '**/*.tsx',
       ],
-      processors: ['stylelint-processor-styled-components'],
-      customSyntax: 'postcss-scss',
+      customSyntax: 'postcss-styled-syntax',
     },
   ],
 };
