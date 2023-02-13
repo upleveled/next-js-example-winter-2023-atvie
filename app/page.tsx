@@ -13,6 +13,7 @@ export default function HomePage() {
       <h1>HOME</h1>
       <main>
         <GenerateButton />
+
         <h2>image with next/image. width and height</h2>
         {/*
         The Next.js Image component will perform

@@ -18,6 +18,8 @@ type Props = {
 };
 
 export default function RootLayout(props: Props) {
+  const randomNumber = Math.floor(Math.random() * 10);
+
   return (
     <html lang="en">
       <head />
@@ -30,6 +32,7 @@ export default function RootLayout(props: Props) {
               <Link href="/animals">Animals</Link>
               <Link href="/fruits">Fruits</Link>
             </div>
+            <div>{randomNumber}</div>
           </nav>
         </header>
         {props.children}

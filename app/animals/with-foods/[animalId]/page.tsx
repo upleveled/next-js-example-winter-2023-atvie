@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import {
@@ -9,7 +10,7 @@ import { animalNotFoundMetadata } from '../../[animalId]/not-found';
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata(props: Props) {
+export async function generateMetadata(props: Props): Promise<Metadata> {
   const singleAnimal = await getAnimalById(parseInt(props.params.animalId));
 
   if (!singleAnimal) {
