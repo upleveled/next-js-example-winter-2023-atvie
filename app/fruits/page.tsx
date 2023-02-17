@@ -40,7 +40,7 @@ export default function FruitsPage() {
       {fruitsWithStars.map((fruit) => {
         return (
           <div
-            key={fruit.id}
+            key={`fruit-${fruit.id}`}
             data-test-id={`fruit-type-${fruit.name.toLocaleLowerCase()}`}
           >
             <Link href={`/fruits/${fruit.name.toLocaleLowerCase()}`}>

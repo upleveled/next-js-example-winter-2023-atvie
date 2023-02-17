@@ -17,7 +17,7 @@ export default async function AnimalsPage() {
       <main>
         {animals.map((animal) => {
           return (
-            <div key={animal.id}>
+            <div key={`animal-${animal.id}`}>
               <Link
                 href={`/animal-management-naive-dont-copy/read/${animal.id}`}
               >

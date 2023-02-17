@@ -69,7 +69,7 @@ export default function Dashboard(props: Props) {
       {typeof error === 'string' && <div style={{ color: 'red' }}>{error}</div>}
       <div>
         {animals.map((animal) => (
-          <div key={animal.id}>
+          <div key={`animal-${animal.id}`}>
             {idOnEditMode !== animal.id ? (
               animal.firstName
             ) : (
