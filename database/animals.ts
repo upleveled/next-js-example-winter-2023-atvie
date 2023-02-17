@@ -10,7 +10,7 @@ import { sql } from './connect';
 //   { id: 5, firstName: 'Karl', type: 'llama', accessory: 'hat' },
 // ];
 
-type Animal = {
+export type Animal = {
   id: number;
   firstName: string;
   type: string;
@@ -25,6 +25,18 @@ export const getAnimals = cache(async () => {
 
   return animals;
 });
+
+export const getAnimalsWithLimitAndOffset = cache(
+  async (limit: number, offset: number) => {
+    const animals = await sql<Animal[]>`
+    SELECT * FROM animals
+    Limit ${limit}
+    offset ${offset}
+  `;
+
+    return animals;
+  },
+);
 
 // get a single animal
 export const getAnimalById = cache(async (id: number) => {
