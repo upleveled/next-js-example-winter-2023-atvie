@@ -1,9 +1,9 @@
-name: Playwright Tests
+name: Playwright Tests and Deploy to Fly.io
 on: push
 
 jobs:
   e2e-tests:
-    name: Playwright Tests
+    name: Playwright Tests and Deploy to Fly.io
     runs-on: ubuntu-latest # or macos-latest, windows-latest
     # Update env variables with your own database credentials
     env:
