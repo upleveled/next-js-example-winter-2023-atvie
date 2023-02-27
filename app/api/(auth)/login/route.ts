@@ -23,12 +23,7 @@ export const POST = async (request: NextRequest) => {
 
     return NextResponse.json(
       {
-        errors: [
-          {
-            message:
-              'Request body is missing one of the needed properties username and password',
-          },
-        ],
+        errors: result.error.issues,
       },
       { status: 400 },
     );
