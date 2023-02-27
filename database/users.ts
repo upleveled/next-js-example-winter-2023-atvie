@@ -10,13 +10,13 @@ export type User = {
 export const createUser = cache(
   async (username: string, password_hash: string) => {
     const [userWithoutPassword] = await sql<{ id: number; username: string }[]>`
-    INSERT INTO users
-      (username, password_hash)
-    VALUES
-      (${username}, ${password_hash})
-    RETURNING
-      id,
-      username
+      INSERT INTO users
+        (username, password_hash)
+      VALUES
+        (${username}, ${password_hash})
+      RETURNING
+        id,
+        username
   `;
 
     return userWithoutPassword!;
