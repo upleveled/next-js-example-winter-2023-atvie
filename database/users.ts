@@ -44,12 +44,12 @@ export const getUserWithPasswordHashByUsername = cache(
     if (!username) return undefined;
 
     const [user] = await sql<User[]>`
-    SELECT
-      *
-    FROM
-      users
-    WHERE
-      users.username = ${username}
+      SELECT
+        *
+      FROM
+        users
+      WHERE
+        users.username = ${username}
   `;
 
     return user;
