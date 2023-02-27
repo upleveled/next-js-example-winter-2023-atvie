@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-import { redirect } from 'next/navigation';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createUser, getUserByUsername } from '../../../../database/users';
