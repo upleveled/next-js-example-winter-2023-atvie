@@ -15,7 +15,7 @@ export type LoginResponseBody =
 export const POST = async (request: NextRequest) => {
   const body = await request.json();
 
-  const result = userType.safeParse(body);
+  const result = userSchema.safeParse(body);
 
   if (!result.success) {
     // Inside of result.error.issues you are going to have more granular information about what is failing allowing you to create more specific error massages
@@ -23,8 +23,12 @@ export const POST = async (request: NextRequest) => {
 
     return NextResponse.json(
       {
-        error:
-          'Request body is missing one of the needed properties username and password',
+        errors: [
+          {
+            message:
+              'Request body is missing one of the needed properties username and password',
+          },
+        ],
       },
       { status: 400 },
     );
