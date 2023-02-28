@@ -18,6 +18,7 @@ type Props = {
 };
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default function RootLayout(props: Props) {
   const randomNumber = Math.floor(Math.random() * 10);
@@ -35,6 +36,8 @@ export default function RootLayout(props: Props) {
               <Link href="/fruits">Fruits</Link>
               <Link href="/animals/admin">Admin</Link>
               <Link href="/animals/paginated">paginated</Link>
+              <Link href="/login">Login</Link>
+              <Link href="/register">register</Link>
             </div>
             <div>{randomNumber}</div>
           </nav>
