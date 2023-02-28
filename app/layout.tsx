@@ -18,6 +18,7 @@ type Props = {
 };
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default function RootLayout(props: Props) {
   const randomNumber = Math.floor(Math.random() * 10);

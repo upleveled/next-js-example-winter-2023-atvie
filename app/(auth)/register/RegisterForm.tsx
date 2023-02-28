@@ -31,7 +31,7 @@ export default function RegisterForm(props: Props) {
 
     if ('errors' in loginResponseBody) {
       setErrors(loginResponseBody.errors);
-      return console.log(loginResponseBody.errors);
+      return console.error(loginResponseBody.errors);
     }
 
     if (
@@ -40,11 +40,13 @@ export default function RegisterForm(props: Props) {
       // (because this is untrusted user input)
       /^\/[a-zA-Z0-9-?=/]*$/.test(returnTo)
     ) {
-      router.push(returnTo);
+      router.replace(returnTo);
+      router.refresh();
       return;
     }
 
-    router.push(`/profile/${loginResponseBody.user.username}`);
+    router.replace(`/profile/${loginResponseBody.user.username}`);
+    router.refresh();
   }
 
   return (
