@@ -35,6 +35,8 @@ export default function RootLayout(props: Props) {
               <Link href="/fruits">Fruits</Link>
               <Link href="/animals/admin">Admin</Link>
               <Link href="/animals/paginated">paginated</Link>
+              <Link href="/register">register</Link>
+              <Link href="/login">login</Link>
             </div>
             <div>{randomNumber}</div>
           </nav>
