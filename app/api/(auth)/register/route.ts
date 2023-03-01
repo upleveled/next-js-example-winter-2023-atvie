@@ -12,7 +12,7 @@ export type RegisterResponseBody =
   | { errors: { message: string }[] }
   | { user: { username: string } };
 
-export const POST = async (request: NextRequest) => {
+export async function POST(request: NextRequest) {
   // 1. validate the data
   const body = await request.json();
 
@@ -65,4 +65,4 @@ export const POST = async (request: NextRequest) => {
 
   // 5. return the new username
   return NextResponse.json({ user: { username: newUser.username } });
-};
+}
