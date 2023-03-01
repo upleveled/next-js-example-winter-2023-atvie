@@ -3,7 +3,6 @@ const nextConfig = {
   experimental: {
     appDir: true,
     typedRoutes: true,
-    serverComponentsExternalPackages: ['bcrypt'],
   },
   eslint: {
     ignoreDuringBuilds: true,
