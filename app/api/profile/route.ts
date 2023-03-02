@@ -8,6 +8,8 @@ export async function GET() {
   const cookieStore = cookies();
   const token = cookieStore.get('sessionToken');
 
+  console.log(token);
+
   // 2. validate that session
   // 3. get the user profile matching the session
   const user = token && (await getUserBySessionToken(token.value));
@@ -16,6 +18,24 @@ export async function GET() {
     return NextResponse.json({ error: 'user not found' });
   }
   // 4. return the user profile
+
+  return NextResponse.json(user);
+}
+
+export async function POST() {
+  const cookieStore = cookies();
+  const token = cookieStore.get('sessionToken');
+
+  console.log(token);
+
+  const user = token && (await getUserBySessionToken(token.value));
+
+  if (!user) {
+    return NextResponse.json({ error: 'user not found' });
+  }
+
+  console.log(`THIS IS DANGEROUS, since is not well protected`);
+  console.log(`buy something on the name of ${user.username}}`);
 
   return NextResponse.json(user);
 }
