@@ -1,11 +1,11 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export const config = {
   matcher: '/logout',
 };
 
 // in middleware request headers are read only
-export function middleware(request) {
+export function middleware(request: NextRequest) {
   // creating a new headers object
   const requestHeaders = new Headers(request.headers);
 
@@ -25,6 +25,7 @@ export function middleware(request) {
   // delete the cookie from the browser
   response.cookies.set({
     name: 'sessionToken',
+    value: '',
     maxAge: -1,
   });
 
