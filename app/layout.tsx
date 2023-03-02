@@ -1,5 +1,7 @@
 import './global.scss';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
+import { getUserBySessionToken } from '../database/users';
 import CookieBanner from './CookieBanner';
 import styles from './layout.module.scss';
 
@@ -19,7 +21,15 @@ type Props = {
 
 export const dynamic = 'force-dynamic';
 
-export default function RootLayout(props: Props) {
+export default async function RootLayout(props: Props) {
+  // 1. get the session token from the cookie
+  const cookieStore = cookies();
+  const token = cookieStore.get('sessionToken');
+
+  // 2. validate that session
+  // 3. get the user profile matching the session
+  const user = token && (await getUserBySessionToken(token.value));
+
   const randomNumber = Math.floor(Math.random() * 10);
 
   return (
@@ -37,6 +47,11 @@ export default function RootLayout(props: Props) {
               <Link href="/animals/paginated">paginated</Link>
               <Link href="/register">register</Link>
               <Link href="/login">login</Link>
+              {/* we want to disable prefetch for logout link */}
+              <Link href="/logout" prefetch={false}>
+                logout
+              </Link>
+              {user && user.username}
             </div>
             <div>{randomNumber}</div>
           </nav>
