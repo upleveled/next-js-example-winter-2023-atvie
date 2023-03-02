@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { fruits } from '../../database/fruits';
-import { CookieValue } from '../../utils/cookies';
+import { CookieValue } from '../../util/cookies';
 
 export const metadata = {
   title: 'Fruits',

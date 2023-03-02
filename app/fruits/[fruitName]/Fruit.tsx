@@ -1,7 +1,7 @@
 'use client';
 
 import { Fruit } from '../../../database/fruits';
-import { getParsedCookie, setStringifiedCookie } from '../../../utils/cookies';
+import { getParsedCookie, setStringifiedCookie } from '../../../util/cookies';
 
 // fruitsCookie = [ {id: number, stars: number  },  ]
 type Props = {

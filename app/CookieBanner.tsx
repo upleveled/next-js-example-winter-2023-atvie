@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getLocalStorage, setLocalStorage } from '../utils/localStorage';
+import { getLocalStorage, setLocalStorage } from '../util/localStorage';
 
 export default function CookieBanner() {
   const [areCookiesTermsAccepted, setAreCookiesTermsAccepted] = useState(false);

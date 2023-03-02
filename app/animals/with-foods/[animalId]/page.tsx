@@ -5,7 +5,7 @@ import {
   getAnimalById,
   getAnimalByIdWithFoods as getAnimalsByIdWithFoods,
 } from '../../../../database/animals';
-import { getAnimalWithFoods } from '../../../../utils/dataStructure';
+import { getAnimalWithFoods } from '../../../../util/dataStructure';
 import { animalNotFoundMetadata } from '../../[animalId]/not-found';
 
 export const dynamic = 'force-dynamic';
