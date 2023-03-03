@@ -111,7 +111,7 @@ export const getAnimalByIdWithFoodsAndSessionToken = cache(
 );
 
 export const createAnimal = cache(
-  async (firstName: string, type: string, accessory: string, token: string) => {
+  async (firstName: string, type: string, accessory: string) => {
     const [animal] = await sql<Animal[]>`
       INSERT INTO animals
         (first_name, type, accessory)

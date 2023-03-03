@@ -10,7 +10,8 @@
     "**/*.cjs",
     "**/*.mjs",
     ".next/types/**/*.ts",
-    "next-env.d.ts"
+    "next-env.d.ts",
+    "/Users/josehower/projects-upleveled/next-js-example-winter-2023-vienna-austria-/.next/types/**/*.ts"
   ],
   "compilerOptions": {
     "jsx": "preserve",
