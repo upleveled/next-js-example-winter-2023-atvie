@@ -51,6 +51,26 @@ export const getAnimalById = cache(async (id: number) => {
   return animal;
 });
 
+// get a single animal only if i have a valid session token
+export const getAnimalByIdAndSessionToken = cache(
+  async (id: number, token: string) => {
+    const [animal] = await sql<Animal[]>`
+    SELECT
+      animals.*
+    FROM
+      animals
+    INNER JOIN
+      sessions ON (
+        sessions.token = ${token} AND
+        sessions.expiry_timestamp > now()
+      )
+    WHERE
+      animals.id = ${id}
+  `;
+    return animal;
+  },
+);
+
 export type AnimalWithFoods = {
   animalId: number;
   animalFirstName: string;
@@ -61,8 +81,9 @@ export type AnimalWithFoods = {
   foodType: string;
 };
 
-export const getAnimalByIdWithFoods = cache(async (id: number) => {
-  const animalsWithFoods = await sql<AnimalWithFoods[]>`
+export const getAnimalByIdWithFoodsAndSessionToken = cache(
+  async (id: number, token: string) => {
+    const animalsWithFoods = await sql<AnimalWithFoods[]>`
     SELECT
       animals.id AS animal_id,
       animals.first_name AS animal_first_name,
@@ -77,14 +98,20 @@ export const getAnimalByIdWithFoods = cache(async (id: number) => {
       animals_foods ON animals.id = animals_foods.animal_id
     INNER JOIN
       foods ON animals_foods.food_id = foods.id
+    INNER JOIN
+      sessions ON (
+        sessions.token = ${token} AND
+        sessions.expiry_timestamp > now()
+      )
     WHERE
       animals.id = ${id}
   `;
-  return animalsWithFoods;
-});
+    return animalsWithFoods;
+  },
+);
 
 export const createAnimal = cache(
-  async (firstName: string, type: string, accessory: string) => {
+  async (firstName: string, type: string, accessory: string, token: string) => {
     const [animal] = await sql<Animal[]>`
       INSERT INTO animals
         (first_name, type, accessory)

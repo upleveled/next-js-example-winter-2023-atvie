@@ -1,9 +1,10 @@
 import { Metadata } from 'next';
+import { cookies } from 'next/headers';
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import {
   getAnimalById,
-  getAnimalByIdWithFoods as getAnimalsByIdWithFoods,
+  getAnimalByIdWithFoodsAndSessionToken,
 } from '../../../../database/animals';
 import { getAnimalWithFoods } from '../../../../util/dataStructure';
 import { animalNotFoundMetadata } from '../../[animalId]/not-found';
@@ -30,9 +31,21 @@ type Props = {
 };
 
 export default async function AnimalWithFoodsPage(props: Props) {
-  const animalsWithFoods = await getAnimalsByIdWithFoods(
-    parseInt(props.params.animalId),
-  );
+  // check if i have a valid session
+  const sessionTokenCookie = cookies().get('sessionToken');
+
+  const animalsWithFoods =
+    sessionTokenCookie &&
+    // this function now is a secure function
+    (await getAnimalByIdWithFoodsAndSessionToken(
+      parseInt(props.params.animalId),
+      sessionTokenCookie.value,
+    ));
+
+  // if i am not logged in i redirect to login
+  if (!animalsWithFoods) {
+    redirect(`/login?returnTo=/animals/with-foods/${props.params.animalId}`);
+  }
 
   if (!animalsWithFoods[0]) {
     // throw new Error('this action is not allowed with Error id: 213123123');

@@ -29,6 +29,8 @@ export default async function RootLayout(props: Props) {
   // 2. validate that session
   // 3. get the user profile matching the session
   const user = token && (await getUserBySessionToken(token.value));
+  // if i have a user the person is logged in
+  // if don't have a user the person is logged out
 
   const randomNumber = Math.floor(Math.random() * 10);
 
@@ -45,15 +47,21 @@ export default async function RootLayout(props: Props) {
               <Link href="/fruits">Fruits</Link>
               <Link href="/animals/admin">Admin</Link>
               <Link href="/animals/paginated">paginated</Link>
-              <Link href="/register">register</Link>
-              <Link href="/login">login</Link>
-              {/* we want to disable prefetch for logout link */}
-              <Link href="/logout" prefetch={false}>
-                logout
-              </Link>
-              {user && user.username}
+              <div>{randomNumber}</div>
+              <div className={styles.auth}>
+                {user && user.username}
+                {user ? (
+                  <Link href="/logout" prefetch={false}>
+                    logout
+                  </Link>
+                ) : (
+                  <>
+                    <Link href="/register">register</Link>
+                    <Link href="/login">login</Link>
+                  </>
+                )}
+              </div>
             </div>
-            <div>{randomNumber}</div>
           </nav>
         </header>
         {props.children}

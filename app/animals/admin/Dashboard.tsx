@@ -5,6 +5,7 @@ import { Animal } from '../../../database/animals';
 
 type Props = {
   animals: Animal[];
+  csrfToken: string;
 };
 
 export default function Dashboard(props: Props) {
@@ -49,7 +50,12 @@ export default function Dashboard(props: Props) {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ firstName, type, accessory }),
+            body: JSON.stringify({
+              firstName,
+              type,
+              accessory,
+              csrfToken: props.csrfToken,
+            }),
           });
 
           const data = await response.json();

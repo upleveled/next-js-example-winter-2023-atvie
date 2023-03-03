@@ -55,6 +55,6 @@ export function createSerializedRegisterSessionTokenCookie(token: string) {
     // Be explicit about new default behavior
     // in browsers
     // https://web.dev/samesite-cookies-explained/
-    sameSite: 'lax',
+    sameSite: 'lax', // this prevents CSRF attacks
   });
 }
