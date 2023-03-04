@@ -8,7 +8,7 @@ import {
 import { getUserBySessionToken } from '../../../database/users';
 import { validateTokenAgainstSecret } from '../../../util/csrf';
 
-const animalType = z.object({
+const animalSchema = z.object({
   firstName: z.string(),
   type: z.string(),
   accessory: z.string(),
@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
 
   const body = await request.json();
 
-  const result = animalType.safeParse(body);
+  const result = animalSchema.safeParse(body);
 
   if (!result.success) {
     // Inside of result.error.issues you are going to have more granular information about what is failing allowing you to create more specific error massages
