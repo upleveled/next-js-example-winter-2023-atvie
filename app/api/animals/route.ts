@@ -6,7 +6,7 @@ import {
   getAnimalsWithLimitAndOffset,
 } from '../../../database/animals';
 import { getUserBySessionToken } from '../../../database/users';
-import { validateTokenWithSecret } from '../../../util/csrf';
+import { validateTokenAgainstSecret } from '../../../util/csrf';
 
 const animalType = z.object({
   firstName: z.string(),
@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
   }
 
   // validate csrf token to make sure the request happens from my server
-  if (!validateTokenWithSecret(user.csrfSecret, result.data.csrfToken)) {
+  if (!validateTokenAgainstSecret(user.csrfSecret, result.data.csrfToken)) {
     return NextResponse.json(
       {
         error: 'CSRF token is not valid',

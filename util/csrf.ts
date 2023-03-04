@@ -13,6 +13,6 @@ export function createTokenFromSecret(secret: string) {
 }
 
 // validate a csrf token against a secret/seed in the sessions table
-export function validateTokenWithSecret(secret: string, token: string) {
+export function validateTokenAgainstSecret(secret: string, token: string) {
   return tokens.verify(secret, token);
 }
