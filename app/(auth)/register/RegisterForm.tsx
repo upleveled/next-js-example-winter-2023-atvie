@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { getSafeReturnToPath } from '../../../util/sanitization';
 import { RegisterResponseBody } from '../../api/(auth)/register/route';
 
 export default function RegisterForm(props: { returnTo?: string | string[] }) {
@@ -27,13 +28,10 @@ export default function RegisterForm(props: { returnTo?: string | string[] }) {
           return;
         }
 
-        if (
-          props.returnTo &&
-          !Array.isArray(props.returnTo) &&
-          // This is checking that the return to is a valid path in your application and not going to a different domain
-          /^\/[a-zA-Z0-9-?=/]*$/.test(props.returnTo)
-        ) {
-          router.push(props.returnTo);
+        const returnTo = getSafeReturnToPath(props.returnTo);
+
+        if (returnTo) {
+          router.push(returnTo);
           return;
         }
 
