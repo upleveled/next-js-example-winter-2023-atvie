@@ -1,3 +1,16 @@
+diff --git a/node_modules/next/dist/build/webpack/plugins/next-types-plugin.js b/node_modules/next/dist/build/webpack/plugins/next-types-plugin.js
+index 8532ab0..7b8914b 100644
+--- a/node_modules/next/dist/build/webpack/plugins/next-types-plugin.js
++++ b/node_modules/next/dist/build/webpack/plugins/next-types-plugin.js
+@@ -273,7 +273,7 @@ class NextTypesPlugin {
+         if (!this.typedRoutes) return;
+         const isApp = filePath.startsWith(this.appDir + _path.default.sep);
+         // Filter out non-page files in app dir
+-        if (isApp && !/[/\\]page\.[^.]+$/.test(filePath)) {
++        if (isApp && !/[/\\](?:page|route)\.[^.]+$/.test(filePath)) {
+             return;
+         }
+         // Filter out non-page files in pages dir
 diff --git a/node_modules/next/dist/client/components/layout-router.js b/node_modules/next/dist/client/components/layout-router.js
 index 9b60a45..dd0639d 100644
 --- a/node_modules/next/dist/client/components/layout-router.js
