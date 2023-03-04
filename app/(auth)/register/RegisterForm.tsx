@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { getSafeReturnToPath } from '../../../util/sanitization';
+import { getSafeReturnToPath } from '../../../util/validation';
 import { RegisterResponseBody } from '../../api/(auth)/register/route';
 
 export default function RegisterForm(props: { returnTo?: string | string[] }) {
