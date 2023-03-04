@@ -81,7 +81,6 @@ export async function POST(request: NextRequest) {
     result.data.firstName,
     result.data.type,
     result.data.accessory,
-    token.value,
   );
 
   return NextResponse.json({ animal: newAnimal });

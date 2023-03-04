@@ -24,13 +24,16 @@ export const dynamic = 'force-dynamic';
 export default async function RootLayout(props: Props) {
   // 1. get the session token from the cookie
   const cookieStore = cookies();
-  const token = cookieStore.get('sessionToken');
+  const sessionToken = cookieStore.get('sessionToken');
 
   // 2. validate that session
   // 3. get the user profile matching the session
-  const user = token && (await getUserBySessionToken(token.value));
-  // if i have a user the person is logged in
-  // if don't have a user the person is logged out
+  const user = !sessionToken?.value
+    ? undefined
+    : await getUserBySessionToken(sessionToken.value);
+
+  // if user is not undefined, the person is logged in
+  // if user is undefined, the person is logged out
 
   const randomNumber = Math.floor(Math.random() * 10);
 
@@ -49,11 +52,13 @@ export default async function RootLayout(props: Props) {
               <Link href="/animals/paginated">paginated</Link>
               <div>{randomNumber}</div>
               <div className={styles.auth}>
-                {user && user.username}
                 {user ? (
-                  <Link href="/logout" prefetch={false}>
-                    logout
-                  </Link>
+                  <>
+                    {user.username}
+                    <Link href="/logout" prefetch={false}>
+                      logout
+                    </Link>
+                  </>
                 ) : (
                   <>
                     <Link href="/register">register</Link>

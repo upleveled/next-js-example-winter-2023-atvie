@@ -73,10 +73,14 @@ export async function POST(request: NextRequest) {
   // - create the token
   const token = crypto.randomBytes(80).toString('base64');
 
-  const csrfSecret = createCsrfSecret()
+  const csrfSecret = createCsrfSecret();
 
   // - create the session
-  const session = await createSession(token, userWithPasswordHash.id, csrfSecret);
+  const session = await createSession(
+    token,
+    userWithPasswordHash.id,
+    csrfSecret,
+  );
 
   if (!session) {
     return NextResponse.json(
