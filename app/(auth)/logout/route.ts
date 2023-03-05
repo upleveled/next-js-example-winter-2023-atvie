@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { deleteSessionByToken } from '../../../database/sessions';
 
-export async function GET() {
+export async function GET(): Promise<NextResponse<null>> {
   const cookieStore = cookies();
   const token = cookieStore.get('sessionToken');
 

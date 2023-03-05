@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import {
+  Animal,
   deleteAnimalById,
   getAnimalById,
   updateAnimalById,
@@ -12,10 +13,34 @@ const animalSchema = z.object({
   accessory: z.string(),
 });
 
+export type AnimalResponseBodyGet =
+  | {
+      error: string;
+    }
+  | {
+      animal: Animal;
+    };
+
+export type AnimalResponseBodyPut =
+  | {
+      error: string;
+    }
+  | {
+      animal: Animal;
+    };
+
+export type AnimalResponseBodyDelete =
+  | {
+      error: string;
+    }
+  | {
+      animal: Animal;
+    };
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Record<string, string | string[]> },
-) {
+): Promise<NextResponse<AnimalResponseBodyGet>> {
   const animalId = Number(params.animalId);
 
   if (!animalId) {
@@ -29,25 +54,14 @@ export async function GET(
 
   const singleAnimal = await getAnimalById(animalId);
 
-  return NextResponse.json({ animal: singleAnimal });
-}
-
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: Record<string, string | string[]> },
-) {
-  const animalId = Number(params.animalId);
-
-  if (!animalId) {
+  if (!singleAnimal) {
     return NextResponse.json(
       {
-        error: 'Animal id is not valid',
+        error: 'Animal not found',
       },
-      { status: 400 },
+      { status: 404 },
     );
   }
-
-  const singleAnimal = await deleteAnimalById(animalId);
 
   return NextResponse.json({ animal: singleAnimal });
 }
@@ -55,7 +69,7 @@ export async function DELETE(
 export async function PUT(
   request: NextRequest,
   { params }: { params: Record<string, string | string[]> },
-) {
+): Promise<NextResponse<AnimalResponseBodyPut>> {
   const animalId = Number(params.animalId);
 
   if (!animalId) {
@@ -91,5 +105,43 @@ export async function PUT(
     result.data.accessory,
   );
 
+  if (!newAnimal) {
+    return NextResponse.json(
+      {
+        error: 'Animal not found',
+      },
+      { status: 404 },
+    );
+  }
+
   return NextResponse.json({ animal: newAnimal });
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Record<string, string | string[]> },
+): Promise<NextResponse<AnimalResponseBodyDelete>> {
+  const animalId = Number(params.animalId);
+
+  if (!animalId) {
+    return NextResponse.json(
+      {
+        error: 'Animal id is not valid',
+      },
+      { status: 400 },
+    );
+  }
+
+  const singleAnimal = await deleteAnimalById(animalId);
+
+  if (!singleAnimal) {
+    return NextResponse.json(
+      {
+        error: 'Animal not found',
+      },
+      { status: 404 },
+    );
+  }
+
+  return NextResponse.json({ animal: singleAnimal });
 }

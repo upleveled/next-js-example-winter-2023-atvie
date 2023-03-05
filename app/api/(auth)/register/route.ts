@@ -12,11 +12,13 @@ const userSchema = z.object({
   password: z.string(),
 });
 
-export type RegisterResponseBody =
+export type RegisterResponseBodyPost =
   | { errors: { message: string }[] }
   | { user: { username: string } };
 
-export async function POST(request: NextRequest) {
+export async function POST(
+  request: NextRequest,
+): Promise<NextResponse<RegisterResponseBodyPost>> {
   // 1. validate the data
   const body = await request.json();
 

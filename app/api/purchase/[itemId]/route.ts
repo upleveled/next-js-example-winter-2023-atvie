@@ -1,8 +1,16 @@
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
-import { getUserBySessionToken } from '../../../../database/users';
+import { getUserBySessionToken, User } from '../../../../database/users';
 
-export async function POST() {
+export type PurchaseResponseBodyPost =
+  | {
+      error: string;
+    }
+  | {
+      user: User;
+    };
+
+export async function POST(): Promise<NextResponse<PurchaseResponseBodyPost>> {
   // This is a protected Route Handler that is insecure and vulnerable to CSRF attacks
 
   // 1. get the session token from the cookie
@@ -22,5 +30,5 @@ export async function POST() {
   );
   console.log(`you are hacked!!! this is very insecure `);
 
-  return NextResponse.json(user);
+  return NextResponse.json({ user: user });
 }

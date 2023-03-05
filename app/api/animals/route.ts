@@ -2,6 +2,7 @@ import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import {
+  Animal,
   createAnimal,
   getAnimalsWithLimitAndOffset,
 } from '../../../database/animals';
@@ -15,7 +16,25 @@ const animalSchema = z.object({
   csrfToken: z.string(),
 });
 
-export async function GET(request: NextRequest) {
+export type AnimalsResponseBodyGet =
+  | {
+      error: string;
+    }
+  | {
+      animals: Animal[];
+    };
+
+export type AnimalsResponseBodyPost =
+  | {
+      error: string;
+    }
+  | {
+      animal: Animal;
+    };
+
+export async function GET(
+  request: NextRequest,
+): Promise<NextResponse<AnimalsResponseBodyGet>> {
   // this should be a public api method (unprotected)
   const { searchParams } = new URL(request.url);
 
@@ -36,7 +55,9 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({ animals: animals });
 }
 
-export async function POST(request: NextRequest) {
+export async function POST(
+  request: NextRequest,
+): Promise<NextResponse<AnimalsResponseBodyPost>> {
   // this is a protected Route Handler
   // 1. get the session token from the cookie
   const cookieStore = cookies();
@@ -82,6 +103,15 @@ export async function POST(request: NextRequest) {
     result.data.type,
     result.data.accessory,
   );
+
+  if (!newAnimal) {
+    return NextResponse.json(
+      {
+        error: 'Animal not created!',
+      },
+      { status: 500 },
+    );
+  }
 
   return NextResponse.json({ animal: newAnimal });
 }

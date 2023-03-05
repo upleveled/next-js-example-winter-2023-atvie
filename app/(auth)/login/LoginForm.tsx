@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { getSafeReturnToPath } from '../../../util/validation';
-import { RegisterResponseBody } from '../../api/(auth)/register/route';
+import { LoginResponseBodyPost } from '../../api/(auth)/login/route';
 
 export default function LoginForm(props: { returnTo?: string | string[] }) {
   const [username, setUsername] = useState('');
@@ -21,7 +21,7 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
           body: JSON.stringify({ username, password }),
         });
 
-        const data: RegisterResponseBody = await response.json();
+        const data: LoginResponseBodyPost = await response.json();
 
         if ('errors' in data) {
           setErrors(data.errors);
