@@ -66,3 +66,25 @@ index 774f9e1..e644086 100644
  if (isPrebundled) {
      (0, _requireHook).overrideBuiltInReactPackages();
  }
+diff --git a/node_modules/next/dist/server/web/spec-extension/response.d.ts b/node_modules/next/dist/server/web/spec-extension/response.d.ts
+index 268f52b..6ef065b 100644
+--- a/node_modules/next/dist/server/web/spec-extension/response.d.ts
++++ b/node_modules/next/dist/server/web/spec-extension/response.d.ts
+@@ -2,14 +2,15 @@ import type { I18NConfig } from '../../config-shared';
+ import { NextURL } from '../next-url';
+ import { ResponseCookies } from './cookies';
+ declare const INTERNALS: unique symbol;
+-export declare class NextResponse extends Response {
++export declare class NextResponse<B = void> extends Response {
+     [INTERNALS]: {
+         cookies: ResponseCookies;
+         url?: NextURL;
++        B: B
+     };
+     constructor(body?: BodyInit | null, init?: ResponseInit);
+     get cookies(): ResponseCookies;
+-    static json(body: any, init?: ResponseInit): NextResponse;
++    static json<T>(body: T, init?: ResponseInit): NextResponse<T>;
+     static redirect(url: string | NextURL | URL, init?: number | ResponseInit): NextResponse;
+     static rewrite(destination: string | NextURL | URL, init?: MiddlewareResponseInit): NextResponse;
+     static next(init?: MiddlewareResponseInit): NextResponse;
