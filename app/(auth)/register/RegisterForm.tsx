@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { getSafeReturnToPath } from '../../../util/validation';
-import { RegisterResponseBodyPost } from '../../api/(auth)/register/route';
+import { RegisterResponseBodyPost } from '../api/register/route';
 
 export default function RegisterForm(props: { returnTo?: string | string[] }) {
   const [username, setUsername] = useState('');
