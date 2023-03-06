@@ -11,7 +11,7 @@ export async function GET(): Promise<NextResponse<null>> {
     await deleteSessionByToken(token.value);
   }
 
-  return new NextResponse(null, {
+  return NextResponse.json(null, {
     status: 307,
     headers: {
       'Set-Cookie': cookie.serialize('sessionToken', '', {
