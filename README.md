@@ -1,10 +1,11 @@
 # API DESIGN
 
--> create an animal ok
--> update an animal ok
--> delete an animal
--> get all animals but limited to x amount ok
+- [ ] create an animal 
+- [ ] update an animal
+- [ ] delete an animal
+- [ ] get all animals but limited to x amount
 
+```txt
 /api/animals
 GET => read all animals should receive a param that limit the amount of animals
 POST => create a new animal
@@ -14,6 +15,8 @@ NextResponse.json({ animals: animals });
 GET => read a single animal
 PUT => update a single animal
 DELETE => delete a single animal
+
+```
 
 # Next.js Example - Winter 2023
 
