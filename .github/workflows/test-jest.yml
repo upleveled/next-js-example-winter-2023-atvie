@@ -25,4 +25,4 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       # Run the Jest unit tests
-      - run: yarn jest
+      - run: pnpm jest
