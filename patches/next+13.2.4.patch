@@ -1,8 +1,8 @@
 diff --git a/node_modules/next/dist/build/webpack/plugins/next-types-plugin.js b/node_modules/next/dist/build/webpack/plugins/next-types-plugin.js
-index 8532ab0..357f3f1 100644
+index 9b161b5..f4914f4 100644
 --- a/node_modules/next/dist/build/webpack/plugins/next-types-plugin.js
 +++ b/node_modules/next/dist/build/webpack/plugins/next-types-plugin.js
-@@ -273,7 +273,7 @@ class NextTypesPlugin {
+@@ -293,7 +293,7 @@ class NextTypesPlugin {
          if (!this.typedRoutes) return;
          const isApp = filePath.startsWith(this.appDir + _path.default.sep);
          // Filter out non-page files in app dir
@@ -11,7 +11,7 @@ index 8532ab0..357f3f1 100644
              return;
          }
          // Filter out non-page files in pages dir
-@@ -306,7 +306,7 @@ class NextTypesPlugin {
+@@ -326,7 +326,7 @@ class NextTypesPlugin {
              const relativePathToApp = _path.default.relative(this.appDir, mod.resource);
              const relativePathToRoot = _path.default.relative(this.dir, mod.resource);
              if (!this.dev) {
@@ -20,7 +20,7 @@ index 8532ab0..357f3f1 100644
                      this.collectPage(mod.resource);
                  }
              }
-@@ -341,7 +341,7 @@ class NextTypesPlugin {
+@@ -363,7 +363,7 @@ class NextTypesPlugin {
                      chunkGroup.chunks.forEach((chunk)=>{
                          if (!chunk.name) return;
                          // Here we only track page chunks.
@@ -53,19 +53,6 @@ index d15ce7f..369e036 100644
      } else {
          navigate();
      }
-diff --git a/node_modules/next/dist/server/initialize-require-hook.js b/node_modules/next/dist/server/initialize-require-hook.js
-index 774f9e1..e644086 100644
---- a/node_modules/next/dist/server/initialize-require-hook.js
-+++ b/node_modules/next/dist/server/initialize-require-hook.js
-@@ -1,7 +1,7 @@
- "use strict";
- var _requireHook = require("../build/webpack/require-hook");
- (0, _requireHook).loadRequireHook();
--const isPrebundled = false;
-+const isPrebundled = true;
- if (isPrebundled) {
-     (0, _requireHook).overrideBuiltInReactPackages();
- }
 diff --git a/node_modules/next/dist/server/web/spec-extension/response.d.ts b/node_modules/next/dist/server/web/spec-extension/response.d.ts
 index 268f52b..6ef065b 100644
 --- a/node_modules/next/dist/server/web/spec-extension/response.d.ts
