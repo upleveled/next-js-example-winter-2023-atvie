@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "migrate": "dotenv ley -- --require tsm"
+    "migrate": "dotenv -- ley --require tsm"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
