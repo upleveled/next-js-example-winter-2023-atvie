@@ -23,30 +23,34 @@ jobs:
         run: |
           sudo -u postgres createdb --owner=next_js_example_winter_2023 next_js_example_winter_2023
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: '8'
       # Use the official setup-node action (sets up Node.js):
       # https://github.com/actions/setup-node
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - name: Install dependencies (with cache)
-        uses: bahmutov/npm-install@v1
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
       - name: Install SafeQL if not yet installed (eg. on Windows dev machines)
-        run: grep package.json -e '@ts-safeql/eslint-plugin' || yarn add @ts-safeql/eslint-plugin libpg-query
-      - run: yarn migrate up
+        run: grep package.json -e '@ts-safeql/eslint-plugin' || pnpm add @ts-safeql/eslint-plugin libpg-query
+      - run: pnpm migrate up
       # Also generates next-env.d.ts, required for tsc
       - name: Build Next.js app
-        run: yarn build
+        run: pnpm build
       - name: Run TypeScript Compiler
-        run: yarn tsc
+        run: pnpm tsc
       - name: Run ESLint
-        run: yarn eslint . --max-warnings 0
+        run: pnpm eslint . --max-warnings 0
       - name: Run Stylelint
-        run: yarn stylelint '**/*.{css,scss,less,js,tsx}'
+        run: pnpm stylelint '**/*.{css,scss,less,js,tsx}'
       - name: Install Playwright
-        run: yarn playwright install --with-deps chromium
+        run: pnpm playwright install --with-deps chromium
       - name: Run tests
-        run: yarn playwright test
+        run: pnpm playwright test
       - uses: actions/upload-artifact@v3
         if: failure()
         with:
