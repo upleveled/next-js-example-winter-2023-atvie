@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { getSafeReturnToPath } from '../../../util/validation';
-import { LoginResponseBodyPost } from '../../api/(auth)/login/route';
+import { LoginResponseBodyPost } from '../api/login/route';
 
 export default function LoginForm(props: { returnTo?: string | string[] }) {
   const [username, setUsername] = useState('');
