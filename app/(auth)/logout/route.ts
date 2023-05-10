@@ -20,5 +20,5 @@ export async function GET(): Promise<NextResponse<null>> {
       }),
       location: '/',
     },
-  });
+  }).revalidateTag();
 }
