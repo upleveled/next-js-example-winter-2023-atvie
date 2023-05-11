@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { Fruit } from '../../../database/fruits';
 import { getParsedCookie, setStringifiedCookie } from '../../../util/cookies';
 
@@ -9,6 +10,7 @@ type Props = {
 };
 
 export default function SingleFruit(props: Props) {
+  const router = useRouter();
   return (
     <div>
       <h2>{props.fruit.name}</h2>
@@ -39,6 +41,7 @@ export default function SingleFruit(props: Props) {
             // Update the cookie after transformation
             setStringifiedCookie('fruitsCookie', fruitsInCookies);
           }
+          router.refresh();
         }}
       >
         - ⭐️
@@ -74,6 +77,7 @@ export default function SingleFruit(props: Props) {
 
           // Update the cookie after transformation
           setStringifiedCookie('fruitsCookie', fruitsInCookies);
+          router.refresh();
         }}
       >
         + ⭐️
