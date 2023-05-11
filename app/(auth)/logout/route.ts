@@ -18,7 +18,7 @@ export async function GET(): Promise<NextResponse<null>> {
         maxAge: -1,
         expires: new Date(Date.now() - 10000),
       }),
-      location: '/logout/revalidate',
+      location: '/',
     },
   });
 }
