@@ -1,25 +1,29 @@
-'use client';
-import { useRouter } from 'next/navigation';
-import { useTransition } from 'react';
-import setCookie from './logoutAction';
+import { cookies } from 'next/headers';
+import { deleteSessionByToken } from '../../../database/sessions';
 import styles from './LogoutButton.module.scss';
 
 export default function LogoutButtonClient() {
-  const [, startTransition] = useTransition();
-  const router = useRouter();
-
   return (
-    <button
-      className={styles.logoutButton}
-      onClick={() => {
-        startTransition(() => {
-          setCookie().catch(() => {});
-        });
-        router.replace('/');
-        router.refresh();
-      }}
-    >
-      logout
-    </button>
+    <form>
+      <button
+        className={styles.logoutButton}
+        formAction={async () => {
+          'use server';
+          const cookieStore = cookies();
+          const token = cookieStore.get('sessionToken');
+
+          if (token) {
+            await deleteSessionByToken(token.value);
+          }
+
+          (cookies() as any).set('sessionToken', '', {
+            maxAge: -1,
+            expires: new Date(Date.now() - 10000),
+          });
+        }}
+      >
+        logout
+      </button>
+    </form>
   );
 }

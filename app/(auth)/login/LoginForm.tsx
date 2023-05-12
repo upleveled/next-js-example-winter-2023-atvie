@@ -31,7 +31,8 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
         const returnTo = getSafeReturnToPath(props.returnTo);
 
         if (returnTo) {
-          router.push(returnTo);
+          router.replace(returnTo);
+          router.refresh();
           return;
         }
 

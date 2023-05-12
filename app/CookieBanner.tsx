@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { getLocalStorage, setLocalStorage } from '../util/localStorage';
 
 export default function CookieBanner() {
-  const [areCookiesTermsAccepted, setAreCookiesTermsAccepted] = useState(false);
+  const [areCookiesTermsAccepted, setAreCookiesTermsAccepted] = useState(true);
 
   // this only exist on the client/browser
   useEffect(() => {
@@ -20,9 +20,7 @@ export default function CookieBanner() {
     setAreCookiesTermsAccepted(initialState);
   }, []);
 
-  return areCookiesTermsAccepted ? (
-    <div />
-  ) : (
+  return areCookiesTermsAccepted ? null : (
     <>
       <div>This is the cookie Police. Please accept terms and conditions</div>
       <button
