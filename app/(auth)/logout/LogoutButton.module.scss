@@ -1,0 +1,14 @@
+.logoutButton {
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  color: purple;
+  padding: 2px 5px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: rgb(87, 85, 85);
+    color: white;
+  }
+}
