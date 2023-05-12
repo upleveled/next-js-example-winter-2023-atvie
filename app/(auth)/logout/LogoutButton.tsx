@@ -7,6 +7,7 @@ export default function LogoutButtonClient() {
     <form>
       <button
         className={styles.logoutButton}
+        /* @ts-ignore */
         formAction={async () => {
           'use server';
           const cookieStore = cookies();
