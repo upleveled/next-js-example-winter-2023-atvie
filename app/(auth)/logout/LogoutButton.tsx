@@ -1,3 +1,4 @@
+import { ResponseCookies } from 'next/dist/compiled/@edge-runtime/cookies';
 import { cookies } from 'next/headers';
 import { deleteSessionByToken } from '../../../database/sessions';
 import styles from './LogoutButton.module.scss';
@@ -22,12 +23,16 @@ export default function LogoutButtonClient() {
 
           // use the method to delete cookies only available in server actions and Route Handlers.
           // - https://nextjs.org/docs/app/api-reference/functions/cookies#cookiessetname-value-options
-          // TODO: remove ts-ignore as soon Next.js implement the type update
-          /* @ts-ignore */
-          await cookies().set('sessionToken', '', {
-            maxAge: -1,
-            expires: new Date(Date.now() - 10000),
-          });
+          // TODO: remove casting as soon Next.js implement the type update:
+          // - https://github.com/vercel/next.js/issues/49259#issuecomment-1540019323
+          await (cookies() as unknown as ResponseCookies).set(
+            'sessionToken',
+            '',
+            {
+              maxAge: -1,
+              expires: new Date(Date.now() - 10000),
+            },
+          );
         }}
       >
         logout
