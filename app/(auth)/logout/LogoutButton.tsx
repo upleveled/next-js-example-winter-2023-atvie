@@ -9,7 +9,6 @@ export default function LogoutButtonClient() {
       <button
         className={styles.logoutButton}
         // TODO: remove ts-ignore as soon Next.js implement the type update
-        /* @ts-ignore */
         formAction={async () => {
           // By adding use server we define this function as a server function that can be triggered from the client
           // - https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions#server-functions

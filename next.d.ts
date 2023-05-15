@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { HTMLAttributes } from 'react';
 
 declare const INTERNALS: unique symbol;
 
@@ -19,5 +20,21 @@ declare module 'next/server' {
       body: JsonBody,
       init?: ResponseInit,
     ): NextResponse<JsonBody>;
+  }
+}
+
+declare module '@types/react' {
+  interface ButtonHTMLAttributes<T> extends HTMLAttributes<T> {
+    // autoFocus?: boolean | undefined;
+    // disabled?: boolean | undefined;
+    // form?: string | undefined;
+    formAction?: string | (() => Promise<any>) | undefined;
+    // formEncType?: string | undefined;
+    // formMethod?: string | undefined;
+    // formNoValidate?: boolean | undefined;
+    // formTarget?: string | undefined;
+    // name?: string | undefined;
+    // type?: 'submit' | 'reset' | 'button' | undefined;
+    // value?: string | ReadonlyArray<string> | number | undefined;
   }
 }
