@@ -1,5 +1,6 @@
 'use client';
 
+// import { cookies } from 'next/headers';
 import { useRouter } from 'next/navigation';
 import { Fruit } from '../../../database/fruits';
 import { getParsedCookie, setStringifiedCookie } from '../../../util/cookies';
@@ -11,6 +12,7 @@ type Props = {
 
 export default function SingleFruit(props: Props) {
   const router = useRouter();
+
   return (
     <div>
       <h2>{props.fruit.name}</h2>

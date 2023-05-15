@@ -1,7 +1,9 @@
+import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { fruits } from '../../../database/fruits';
 import { rootNotFoundMetadata } from '../../not-found';
-import Fruit from './Fruit';
+
+// import Fruit from './Fruit';
 
 // export const fruits = [
 //   { id: 1, name: 'Banana', icon: '🍌' },
@@ -34,9 +36,78 @@ export default function FruitPage({ params }) {
     return fruit.name.toLowerCase() === params.fruitName;
   });
 
+  const cookieStore = cookies();
+  const appreciation = cookieStore.get('fruitLove');
+
   if (!singleFruit) {
     notFound();
   }
 
-  return <Fruit fruit={singleFruit} />;
+  const singleFruitAppreciation =
+    appreciation?.value &&
+    JSON.parse(appreciation.value).find(
+      (appreciationValue) => appreciationValue.id === singleFruit.id,
+    );
+
+  return (
+    <>
+      {/* <Fruit fruit={singleFruit} /> */}
+      {singleFruitAppreciation
+        ? singleFruitAppreciation.appreciation
+        : 'Not rated'}
+
+      <form>
+        <input hidden={true} value={params.fruitName} name="fruit-name" />
+        <button
+          formAction={async (formData) => {
+            'use server';
+
+            const fruitFound = fruits.find((fruit) => {
+              return fruit.name.toLowerCase() === formData.get('fruit-name');
+            });
+
+            const love = cookies().get('fruitLove')?.value;
+
+            const parsedLove = love && JSON.parse(love);
+
+            const singleFruitLove =
+              Array.isArray(parsedLove) &&
+              parsedLove.find(
+                (appreciationValue) => appreciationValue.id === fruitFound?.id,
+              );
+
+            await cookies().set(
+              'fruitLove',
+              JSON.stringify(
+                !parsedLove && !singleFruitLove
+                  ? [
+                      {
+                        id: fruitFound.id,
+                        appreciation: 'like',
+                      },
+                    ]
+                  : [
+                      ...parsedLove.filter(
+                        (appreciationValue) =>
+                          appreciationValue.id !== fruitFound?.id,
+                      ),
+                      {
+                        id: fruitFound.id,
+                        appreciation:
+                          singleFruitLove?.appreciation !== 'like'
+                            ? 'like'
+                            : 'dislike',
+                      },
+                    ],
+              ),
+            );
+          }}
+        >
+          {singleFruitAppreciation?.appreciation !== 'like'
+            ? 'like'
+            : 'dislike'}
+        </button>
+      </form>
+    </>
+  );
 }
