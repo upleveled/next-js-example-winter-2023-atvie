@@ -21,7 +21,7 @@ export default function FruitsPage() {
   const fruitsWithNotes = fruits.map((fruit) => {
     const fruitWithNote = { ...fruit, note: '' };
 
-    // Read the cookie and find the fruitNote
+    // read the cookie and find the fruitNote
     const fruitInCookie = fruitNotes.find(
       (fruitObject) => fruit.id === fruitObject.id,
     );
