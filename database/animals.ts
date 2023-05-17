@@ -1,4 +1,5 @@
 import { cache } from 'react';
+import { Animal } from '../migrations/1675675178-createTableAnimals';
 import { sql } from './connect';
 
 // Now we are getting this data from the database
@@ -10,29 +11,24 @@ import { sql } from './connect';
 //   { id: 5, firstName: 'Karl', type: 'llama', accessory: 'hat' },
 // ];
 
-export type Animal = {
-  id: number;
-  firstName: string;
-  type: string;
-  accessory: string | null;
-};
-
 // get all animals
 export const getAnimals = cache(async () => {
   const animals = await sql<Animal[]>`
     SELECT * FROM animals
   `;
-
   return animals;
 });
 
 export const getAnimalsWithLimitAndOffset = cache(
   async (limit: number, offset: number) => {
     const animals = await sql<Animal[]>`
-    SELECT * FROM animals
-    Limit ${limit}
-    offset ${offset}
-  `;
+      SELECT
+        *
+      FROM
+        animals
+      LIMIT ${limit}
+      OFFSET ${offset}
+    `;
 
     return animals;
   },
