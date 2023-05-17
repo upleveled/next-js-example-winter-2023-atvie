@@ -48,7 +48,6 @@ export default function FruitsPage() {
           </div>
         );
       })}
-      {/* <ForceRevalidation /> */}
     </div>
   );
 }
