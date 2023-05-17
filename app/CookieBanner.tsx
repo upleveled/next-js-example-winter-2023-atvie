@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { getLocalStorage, setLocalStorage } from '../util/localStorage';
+import styles from './CookieBanner.module.scss';
 
 export default function CookieBanner() {
-  const [areCookiesTermsAccepted, setAreCookiesTermsAccepted] = useState(false);
+  const [areCookiesTermsAccepted, setAreCookiesTermsAccepted] = useState(true);
 
   // this only exist on the client/browser
   useEffect(() => {
@@ -20,10 +21,13 @@ export default function CookieBanner() {
     setAreCookiesTermsAccepted(initialState);
   }, []);
 
-  return areCookiesTermsAccepted ? (
-    <div />
-  ) : (
-    <>
+  return (
+    <div
+      className={`
+        ${styles.cookieBanner}
+        ${areCookiesTermsAccepted ? styles.close : styles.open}
+      `}
+    >
       <div>This is the cookie Police. Please accept terms and conditions</div>
       <button
         onClick={() => {
@@ -33,6 +37,6 @@ export default function CookieBanner() {
       >
         Accept
       </button>
-    </>
+    </div>
   );
 }

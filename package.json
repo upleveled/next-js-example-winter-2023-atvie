@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "migrate": "dotenv ley"
+    "migrate": "dotenv -- ley --require tsm"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -23,6 +23,7 @@
     "react-dom": "18.2.0",
     "sass": "^1.57.1",
     "sharp": "^0.31.3",
+    "tsm": "^2.3.0",
     "zod": "^3.20.6"
   },
   "devDependencies": {

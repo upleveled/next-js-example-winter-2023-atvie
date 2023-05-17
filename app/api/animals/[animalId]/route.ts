@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import {
-  Animal,
   deleteAnimalById,
   getAnimalById,
   updateAnimalById,
 } from '../../../../database/animals';
+import { Animal } from '../../../../migrations/1675675178-createTableAnimals';
 
 const animalSchema = z.object({
   firstName: z.string(),
