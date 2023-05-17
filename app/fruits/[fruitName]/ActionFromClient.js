@@ -1,5 +1,4 @@
 'use client';
-
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { setFruitNote } from '../../../util/actions';

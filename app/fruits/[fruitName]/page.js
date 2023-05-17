@@ -4,8 +4,6 @@ import { getCookieByName } from '../../../util/cookies';
 import { rootNotFoundMetadata } from '../../not-found';
 import ActionFromClient from './ActionFromClient';
 
-// import Fruit from './Fruit';
-
 // export const fruits = [
 //   { id: 1, name: 'Banana', icon: '🍌' },
 //   { id: 2, name: 'Coconuts', icon: '🥥' },
