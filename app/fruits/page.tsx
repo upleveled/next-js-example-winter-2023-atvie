@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { fruits } from '../../database/fruits';
 import { getCookieByName } from '../../util/cookies';
-import ForceRevalidation from '../ForceRevalidation';
+
+// import ForceRevalidation from '../ForceRevalidation';
 
 export const metadata = {
   title: 'Fruits',
@@ -14,11 +15,11 @@ export const revalidate = false;
 
 export default function FruitsPage() {
   // get the cookie from the server
-  const userFruitCookie = getCookieByName('fruitLove');
+  const userFruitCookie = getCookieByName('fruitNotes');
   const fruitNotes = Array.isArray(userFruitCookie) ? userFruitCookie : [];
 
   const fruitsWithNote = fruits.map((fruit) => {
-    const fruitWithNote = { ...fruit, opinion: '' };
+    const fruitWithNote = { ...fruit, note: '' };
 
     // Read the cookie and find the fruitNote
     const fruitInCookie = fruitNotes.find(
@@ -27,7 +28,7 @@ export default function FruitsPage() {
 
     // if find the fruit update the note
     if (fruitInCookie) {
-      fruitWithNote.opinion = fruitInCookie.appreciation;
+      fruitWithNote.note = fruitInCookie.note;
     }
 
     return fruitWithNote;
@@ -44,12 +45,12 @@ export default function FruitsPage() {
             <Link href={`/fruits/${fruit.name.toLocaleLowerCase()}`}>
               <h2>{fruit.name}</h2>
               <p>{fruit.icon}</p>
-              <p>{fruit.opinion || 'n/a'}</p>
+              <p>{fruit.note || 'n/a'}</p>
             </Link>
           </div>
         );
       })}
-      <ForceRevalidation />
+      {/* <ForceRevalidation /> */}
     </div>
   );
 }

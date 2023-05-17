@@ -19,7 +19,7 @@ export function getCookieByName(name: string): CookieValue | undefined {
 
 export type CookieValue = {
   id: number;
-  appreciation: string;
+  note: string;
 }[];
 
 // more robust way to set items to set the cookie without stringify all the time

@@ -4,20 +4,25 @@ import { getFruitByName } from '../database/fruits';
 import { getCookieByName } from './cookies';
 
 export async function setFruitNote(formData) {
+  console.log(formData.get('fruit-name'));
   const singleFruit = getFruitByName(formData.get('fruit-name'));
-  const userFruitNotes = getCookieByName('fruitLove');
+  console.log(singleFruit);
+
+  if (!singleFruit) return;
+
+  const userFruitNotes = getCookieByName('fruitNotes');
 
   const oldNotes = Array.isArray(userFruitNotes)
-    ? userFruitNotes.filter((fruitNote) => fruitNote.id !== singleFruit?.id)
+    ? userFruitNotes.filter((fruitNote) => fruitNote.id !== singleFruit.id)
     : [];
 
   await cookies().set(
-    'fruitLove',
+    'fruitNotes',
     JSON.stringify([
       ...oldNotes,
       {
         id: singleFruit.id,
-        appreciation: formData.get('fruit-appreciation'),
+        note: formData.get('fruit-note'),
       },
     ]),
   );

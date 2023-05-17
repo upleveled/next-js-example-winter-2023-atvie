@@ -16,6 +16,6 @@ export function getFruitByName(name?: string) {
   if (!name) return undefined;
 
   return fruits.find((fruit) => {
-    return fruit.name.toLowerCase() === name;
+    return fruit.name.toLowerCase() === name.toLowerCase();
   });
 }

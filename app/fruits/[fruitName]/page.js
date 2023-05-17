@@ -3,6 +3,7 @@ import { fruits, getFruitByName } from '../../../database/fruits';
 import { setFruitNote } from '../../../util/actions';
 import { getCookieByName } from '../../../util/cookies';
 import { rootNotFoundMetadata } from '../../not-found';
+import ActionFromClient from './ActionFromClient';
 
 // import Fruit from './Fruit';
 
@@ -15,9 +16,7 @@ import { rootNotFoundMetadata } from '../../not-found';
 // ];
 
 export function generateMetadata({ params }) {
-  const singleFruit = fruits.find((fruit) => {
-    return fruit.name.toLowerCase() === params.fruitName;
-  });
+  const singleFruit = getFruitByName(params.fruitName);
 
   if (!singleFruit) {
     return rootNotFoundMetadata;
@@ -39,13 +38,15 @@ export default function FruitPage({ params }) {
     notFound();
   }
 
-  const appreciation = getCookieByName('fruitLove');
+  let fruitNotesCookie = getCookieByName('fruitNotes');
 
-  const singleFruitAppreciation =
-    Array.isArray(appreciation) &&
-    appreciation.find(
-      (appreciationValue) => appreciationValue.id === singleFruit.id,
-    );
+  if (!Array.isArray(fruitNotesCookie)) {
+    fruitNotesCookie = [];
+  }
+
+  const singleFruitNote = fruitNotesCookie.find(
+    (fruitNote) => fruitNote.id === singleFruit.id,
+  );
 
   return (
     <>
@@ -55,23 +56,27 @@ export default function FruitPage({ params }) {
           whiteSpace: 'pre-line',
         }}
       >
-        {singleFruitAppreciation?.appreciation ||
+        {singleFruitNote?.note ||
           `Please type something about the ${params.fruitName}`}
       </p>
-
+      {/*
       <form>
         <input
           readOnly
           hidden={true}
-          value={params.fruitName}
+          value={singleFruit.name}
           name="fruit-name"
         />
         <textarea
-          name="fruit-appreciation"
-          defaultValue={singleFruitAppreciation?.appreciation}
+          name="fruit-note"
+          defaultValue={singleFruitNote?.note || ''}
         />
         <button formAction={setFruitNote}>Update Opinion</button>
-      </form>
+      </form> */}
+      <ActionFromClient
+        fruitName={singleFruit.name}
+        fruitNote={singleFruitNote?.note || ''}
+      />
     </>
   );
 }
