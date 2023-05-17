@@ -10,6 +10,7 @@ export function getCookieByName(name: string): CookieValue | undefined {
     return undefined;
   }
 
+  // TODO: remove parsing
   try {
     return JSON.parse(cookieValue); // Type should be a string
   } catch (err) {
