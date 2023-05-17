@@ -18,7 +18,7 @@ export default function FruitsPage() {
   const userFruitCookie = getCookieByName('fruitNotes');
   const fruitNotes = Array.isArray(userFruitCookie) ? userFruitCookie : [];
 
-  const fruitsWithNote = fruits.map((fruit) => {
+  const fruitsWithNotes = fruits.map((fruit) => {
     const fruitWithNote = { ...fruit, note: '' };
 
     // Read the cookie and find the fruitNote
@@ -36,7 +36,7 @@ export default function FruitsPage() {
 
   return (
     <div>
-      {fruitsWithNote.map((fruit) => {
+      {fruitsWithNotes.map((fruit) => {
         return (
           <div
             key={`fruit-${fruit.id}`}
