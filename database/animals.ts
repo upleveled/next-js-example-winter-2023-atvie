@@ -18,10 +18,6 @@ export type Animal = {
   accessory: string | null;
 };
 
-export const preload = (id: number) => {
-  void getAnimalById(id);
-};
-
 // get all animals
 export const getAnimals = cache(async () => {
   const animals = await sql<Animal[]>`
@@ -155,3 +151,7 @@ export const deleteAnimalById = cache(async (id: number) => {
   `;
   return animal;
 });
+
+export const preload = (id: number) => {
+  void getAnimalById(id).catch(() => void 0);
+};
