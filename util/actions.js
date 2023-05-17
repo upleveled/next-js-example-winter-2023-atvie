@@ -1,4 +1,5 @@
 'use server';
+
 import { cookies } from 'next/headers';
 import { getFruitByName } from '../database/fruits';
 import { getCookieByName } from './cookies';
