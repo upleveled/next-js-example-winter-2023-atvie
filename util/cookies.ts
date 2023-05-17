@@ -23,6 +23,8 @@ export type CookieValue = {
   note: string;
 }[];
 
+// delete starting here
+
 // more robust way to set items to set the cookie without stringify all the time
 export function setStringifiedCookie(key: string, value: CookieValue) {
   Cookies.set(key, JSON.stringify(value));
@@ -35,6 +37,8 @@ export function deleteCookie(key: string) {
 export function stringifyCookieValue(value: CookieValue) {
   return JSON.stringify(value);
 }
+
+// delete ending here
 
 export function createSerializedRegisterSessionTokenCookie(token: string) {
   // in the deployed version we want our cookie to be sent only under HTTPS
