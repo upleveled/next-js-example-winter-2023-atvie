@@ -2,8 +2,6 @@ import Link from 'next/link';
 import { fruits } from '../../database/fruits';
 import { getCookieByName } from '../../util/cookies';
 
-// import ForceRevalidation from '../ForceRevalidation';
-
 export const metadata = {
   title: 'Fruits',
   description: 'This is my Fruits Page',
