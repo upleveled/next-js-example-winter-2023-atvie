@@ -5,10 +5,10 @@ import { getCookie } from '../../../util/cookies';
 import { parseJson } from '../../../util/json';
 
 export async function createComment(fruitId, comment) {
-  const fruitCommentsParsed = parseJson(getCookie('fruitComments'));
+  const fruitComments = parseJson(getCookie('fruitComments'));
 
-  const currentComments = Array.isArray(fruitCommentsParsed)
-    ? fruitCommentsParsed.filter((fruitComment) => fruitComment.id !== fruitId)
+  const currentComments = Array.isArray(fruitComments)
+    ? fruitComments.filter((fruitComment) => fruitComment.id !== fruitId)
     : [];
 
   await cookies().set(

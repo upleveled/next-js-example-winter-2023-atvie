@@ -10,17 +10,15 @@ export const metadata = {
 
 export default function FruitsPage() {
   // get the cookie from the server
-  const fruitCommentsParsed = parseJson(getCookie('fruitComments'));
+  const fruitComments = parseJson(getCookie('fruitComments'));
 
-  const fruitComments = Array.isArray(fruitCommentsParsed)
-    ? fruitCommentsParsed
-    : [];
+  const currentComments = Array.isArray(fruitComments) ? fruitComments : [];
 
   const fruitsWithComments = fruits.map((fruit) => {
     const fruitWithComment = { ...fruit, comment: '' };
 
     // read the cookie and find the fruitNote
-    const fruitInCookie = fruitComments.find(
+    const fruitInCookie = currentComments.find(
       (fruitObject) => fruit.id === fruitObject.id,
     );
 
