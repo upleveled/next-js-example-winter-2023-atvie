@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
-import { fruits, getFruitByName } from '../../../database/fruits';
-import { setFruitNote } from '../../../util/actions';
+import { getFruitByName } from '../../../database/fruits';
 import { getCookieByName } from '../../../util/cookies';
 import { rootNotFoundMetadata } from '../../not-found';
 import ActionFromClient from './ActionFromClient';
@@ -59,20 +58,6 @@ export default function FruitPage({ params }) {
         {singleFruitNote?.note ||
           `Please type something about the ${params.fruitName}`}
       </p>
-      {/*
-      <form>
-        <input
-          readOnly
-          hidden={true}
-          value={singleFruit.name}
-          name="fruit-name"
-        />
-        <textarea
-          name="fruit-note"
-          defaultValue={singleFruitNote?.note || ''}
-        />
-        <button formAction={setFruitNote}>Update Opinion</button>
-      </form> */}
       <ActionFromClient
         fruitName={singleFruit.name}
         fruitNote={singleFruitNote?.note || ''}

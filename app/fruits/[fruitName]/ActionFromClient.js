@@ -8,10 +8,6 @@ export default function ActionFromClient(props) {
   const [text, setText] = useState(props.fruitNote);
   const router = useRouter();
 
-  useEffect(() => {
-    router.refresh();
-  }, [text, router]);
-
   return (
     <>
       <form>
@@ -27,6 +23,7 @@ export default function ActionFromClient(props) {
           onChange={(event) => {
             setText(event.currentTarget.value);
           }}
+          onBlur={() => router.refresh()}
         />
         <button formAction={setFruitNote}>Update Opinion</button>
       </form>
