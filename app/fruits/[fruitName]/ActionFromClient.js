@@ -16,6 +16,7 @@ export default function ActionFromClient(props) {
         onChange={(event) => {
           setText(event.currentTarget.value);
         }}
+        // This is a hack to clear Client Cache until revalidatePath is fixed
         onBlur={() => router.refresh()}
       />
       <button formAction={setFruitNote}>Update Opinion</button>
