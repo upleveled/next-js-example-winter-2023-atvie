@@ -1,0 +1,20 @@
+.cookieBanner {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  width: 100vw;
+  padding: 5px;
+  transition: all 0.8s;
+
+  &.open {
+    opacity: 1;
+  }
+
+  &.close {
+    opacity: 0;
+  }
+}
