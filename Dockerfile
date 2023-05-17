@@ -1,20 +1,24 @@
-# Initialize builder layer
+# Multi-stage builds: builder stage
 FROM node:18-alpine AS builder
 ENV NODE_ENV production
 # Install necessary tools
 RUN apk add --no-cache libc6-compat yq --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /app
 # Copy the content of the project to the machine
 COPY . .
-RUN yq --inplace --output-format=json '.dependencies = .dependencies * (.devDependencies | to_entries | map(select(.key | test("^(typescript|@types/*|@upleveled/)"))) | from_entries)' package.json
-RUN yarn install --frozen-lockfile
-RUN yarn build
+RUN yq --inplace --output-format=json '(.dependencies = .dependencies * (.devDependencies | to_entries | map(select(.key | test("^(typescript|@types/*|@upleveled/)"))) | from_entries)) | (.devDependencies = {})' package.json
+RUN pnpm install
+RUN pnpm build
 
-# Initialize runner layer
+# Multi-stage builds: runner stage
 FROM node:18-alpine AS runner
 ENV NODE_ENV production
 # Install necessary tools
 RUN apk add bash postgresql
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /app
 
 # Copy built app

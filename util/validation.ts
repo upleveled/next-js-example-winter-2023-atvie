@@ -1,3 +1,4 @@
+import { Route } from 'next';
 import { z } from 'zod';
 
 const returnToSchema = z.string().refine((value) => {
@@ -20,5 +21,5 @@ const returnToSchema = z.string().refine((value) => {
 export function getSafeReturnToPath(path: string | string[] | undefined) {
   const result = returnToSchema.safeParse(path);
   if (!result.success) return undefined;
-  return result.data;
+  return result.data as Route;
 }

@@ -1,7 +1,7 @@
-diff --git a/node_modules/next/dist/build/webpack/plugins/next-types-plugin.js b/node_modules/next/dist/build/webpack/plugins/next-types-plugin.js
-index 9b161b5..f4914f4 100644
---- a/node_modules/next/dist/build/webpack/plugins/next-types-plugin.js
-+++ b/node_modules/next/dist/build/webpack/plugins/next-types-plugin.js
+diff --git a/dist/build/webpack/plugins/next-types-plugin.js b/dist/build/webpack/plugins/next-types-plugin.js
+index 9b161b534a922dfa11a0ec00071b1f76bf637c84..10818626b80e1e4d0603ffbc1ca044619c08f620 100644
+--- a/dist/build/webpack/plugins/next-types-plugin.js
++++ b/dist/build/webpack/plugins/next-types-plugin.js
 @@ -293,7 +293,7 @@ class NextTypesPlugin {
          if (!this.typedRoutes) return;
          const isApp = filePath.startsWith(this.appDir + _path.default.sep);
@@ -25,38 +25,38 @@ index 9b161b5..f4914f4 100644
                          if (!chunk.name) return;
                          // Here we only track page chunks.
 -                        if (!chunk.name.startsWith("pages/") && !(chunk.name.startsWith("app/") && chunk.name.endsWith("/page"))) {
-+                        if (!chunk.name.startsWith("pages/") && !(chunk.name.startsWith("app/") && (chunk.name.endsWith("/page") || chunk.name.endsWith('/route')))) {
++                        if (!chunk.name.startsWith("pages/") && !(chunk.name.startsWith("app/") && (chunk.name.endsWith("/page") || chunk.name.endsWith("/route")))) {
                              return;
                          }
                          const chunkModules = compilation.chunkGraph.getChunkModulesIterable(chunk);
-diff --git a/node_modules/next/dist/client/components/layout-router.js b/node_modules/next/dist/client/components/layout-router.js
-index 9b60a45..dd0639d 100644
---- a/node_modules/next/dist/client/components/layout-router.js
-+++ b/node_modules/next/dist/client/components/layout-router.js
+diff --git a/dist/client/components/layout-router.js b/dist/client/components/layout-router.js
+index 9b60a453b6195a3e070fd53a0d912812cd440fd8..e769a494cfef6ff9f14a59368b3cc8b657e546c8 100644
+--- a/dist/client/components/layout-router.js
++++ b/dist/client/components/layout-router.js
 @@ -317,6 +317,7 @@ function HandleRedirect({ redirect  }) {
      const router = (0, _navigation).useRouter();
      (0, _react).useEffect(()=>{
          router.replace(redirect, {});
-+        router.refresh()
++        router.refresh();
      }, [
          redirect,
          router
-diff --git a/node_modules/next/dist/client/link.js b/node_modules/next/dist/client/link.js
-index d15ce7f..369e036 100644
---- a/node_modules/next/dist/client/link.js
-+++ b/node_modules/next/dist/client/link.js
+diff --git a/dist/client/link.js b/dist/client/link.js
+index d15ce7f4d9324d2a1d37708eda57df6186177623..2ecb95295a3f46ad51072ab1a40759f7bee198ed 100644
+--- a/dist/client/link.js
++++ b/dist/client/link.js
 @@ -83,6 +83,7 @@ function linkClicked(e, router, href, as, replace, shallow, scroll, locale, isAp
      if (isAppRouter) {
          // @ts-expect-error startTransition exists.
          _react.default.startTransition(navigate);
-+        router.refresh()
++        router.refresh();
      } else {
          navigate();
      }
-diff --git a/node_modules/next/dist/server/web/spec-extension/response.d.ts b/node_modules/next/dist/server/web/spec-extension/response.d.ts
-index 268f52b..6ef065b 100644
---- a/node_modules/next/dist/server/web/spec-extension/response.d.ts
-+++ b/node_modules/next/dist/server/web/spec-extension/response.d.ts
+diff --git a/dist/server/web/spec-extension/response.d.ts b/dist/server/web/spec-extension/response.d.ts
+index 268f52b1f12c2f1bb9d71f7c51d8dd6cf3194ac8..2b6b94bd8b68338be31b89cdbee01d7e8dbee9b4 100644
+--- a/dist/server/web/spec-extension/response.d.ts
++++ b/dist/server/web/spec-extension/response.d.ts
 @@ -2,14 +2,15 @@ import type { I18NConfig } from '../../config-shared';
  import { NextURL } from '../next-url';
  import { ResponseCookies } from './cookies';
@@ -66,7 +66,7 @@ index 268f52b..6ef065b 100644
      [INTERNALS]: {
          cookies: ResponseCookies;
          url?: NextURL;
-+        B: B
++        B: B;
      };
      constructor(body?: BodyInit | null, init?: ResponseInit);
      get cookies(): ResponseCookies;

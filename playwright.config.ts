@@ -3,7 +3,7 @@ import { devices, PlaywrightTestConfig } from '@playwright/test';
 // config file reference - https://playwright.dev/docs/test-configuration
 const config: PlaywrightTestConfig = {
   webServer: {
-    command: 'yarn start',
+    command: 'pnpm start',
     port: 3000,
     reuseExistingServer: !process.env.CI,
   },
