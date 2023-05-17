@@ -1,43 +1,41 @@
-import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { fruits } from '../../database/fruits';
-import { CookieValue } from '../../util/cookies';
+import { getCookieByName } from '../../util/cookies';
+import ForceRevalidation from '../ForceRevalidation';
 
 export const metadata = {
   title: 'Fruits',
   description: 'This is my Fruits Page',
 };
 
+// we add this only if we have no dynamic function as cookies or headers
+export const dynamic = 'force-dynamic';
+export const revalidate = false;
+
 export default function FruitsPage() {
   // get the cookie from the server
-  const fruitsCookie = cookies().get('fruitsCookie');
+  const userFruitCookie = getCookieByName('fruitLove');
+  const fruitNotes = Array.isArray(userFruitCookie) ? userFruitCookie : [];
 
-  // create a default value if cooke doesn't exist
-  let fruitsCookieParsed: CookieValue = [];
+  const fruitsWithNote = fruits.map((fruit) => {
+    const fruitWithNote = { ...fruit, opinion: '' };
 
-  if (fruitsCookie) {
-    fruitsCookieParsed = JSON.parse(fruitsCookie.value);
-  }
-
-  const fruitsWithStars = fruits.map((fruit) => {
-    const fruitWithStars = { ...fruit, stars: 0 };
-
-    // i read the cookie and find the fruit
-    const fruitInCookie = fruitsCookieParsed.find(
+    // Read the cookie and find the fruitNote
+    const fruitInCookie = fruitNotes.find(
       (fruitObject) => fruit.id === fruitObject.id,
     );
 
-    // if find the fruit i update the amount of stars
+    // if find the fruit update the note
     if (fruitInCookie) {
-      fruitWithStars.stars = fruitInCookie.stars;
+      fruitWithNote.opinion = fruitInCookie.appreciation;
     }
 
-    return fruitWithStars;
+    return fruitWithNote;
   });
 
   return (
     <div>
-      {fruitsWithStars.map((fruit) => {
+      {fruitsWithNote.map((fruit) => {
         return (
           <div
             key={`fruit-${fruit.id}`}
@@ -46,11 +44,12 @@ export default function FruitsPage() {
             <Link href={`/fruits/${fruit.name.toLocaleLowerCase()}`}>
               <h2>{fruit.name}</h2>
               <p>{fruit.icon}</p>
-              <p>stars: {fruit.stars}</p>
+              <p>{fruit.opinion || 'n/a'}</p>
             </Link>
           </div>
         );
       })}
+      <ForceRevalidation />
     </div>
   );
 }

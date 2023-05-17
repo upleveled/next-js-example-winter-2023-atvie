@@ -11,3 +11,11 @@ export const fruits: Fruit[] = [
   { id: 4, name: 'Mango', icon: '🥭' },
   { id: 5, name: 'Avocado', icon: '🥑' },
 ];
+
+export function getFruitByName(name?: string) {
+  if (!name) return undefined;
+
+  return fruits.find((fruit) => {
+    return fruit.name.toLowerCase() === name;
+  });
+}

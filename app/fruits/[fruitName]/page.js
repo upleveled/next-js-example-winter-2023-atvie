@@ -1,6 +1,7 @@
-import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
-import { fruits } from '../../../database/fruits';
+import { fruits, getFruitByName } from '../../../database/fruits';
+import { setFruitNote } from '../../../util/actions';
+import { getCookieByName } from '../../../util/cookies';
 import { rootNotFoundMetadata } from '../../not-found';
 
 // import Fruit from './Fruit';
@@ -32,81 +33,44 @@ export function generateMetadata({ params }) {
 export const dynamic = 'force-dynamic';
 
 export default function FruitPage({ params }) {
-  const singleFruit = fruits.find((fruit) => {
-    return fruit.name.toLowerCase() === params.fruitName;
-  });
-
-  const cookieStore = cookies();
-  const appreciation = cookieStore.get('fruitLove');
+  const singleFruit = getFruitByName(params.fruitName);
 
   if (!singleFruit) {
     notFound();
   }
 
+  const appreciation = getCookieByName('fruitLove');
+
   const singleFruitAppreciation =
-    appreciation?.value &&
-    JSON.parse(appreciation.value).find(
+    Array.isArray(appreciation) &&
+    appreciation.find(
       (appreciationValue) => appreciationValue.id === singleFruit.id,
     );
 
   return (
     <>
-      {/* <Fruit fruit={singleFruit} /> */}
-      {singleFruitAppreciation
-        ? singleFruitAppreciation.appreciation
-        : 'Not rated'}
+      <h1>{params.fruitName}</h1>
+      <p
+        style={{
+          whiteSpace: 'pre-line',
+        }}
+      >
+        {singleFruitAppreciation?.appreciation ||
+          `Please type something about the ${params.fruitName}`}
+      </p>
 
       <form>
-        <input hidden={true} value={params.fruitName} name="fruit-name" />
-        <button
-          formAction={async (formData) => {
-            'use server';
-
-            const fruitFound = fruits.find((fruit) => {
-              return fruit.name.toLowerCase() === formData.get('fruit-name');
-            });
-
-            const love = cookies().get('fruitLove')?.value;
-
-            const parsedLove = love && JSON.parse(love);
-
-            const singleFruitLove =
-              Array.isArray(parsedLove) &&
-              parsedLove.find(
-                (appreciationValue) => appreciationValue.id === fruitFound?.id,
-              );
-
-            await cookies().set(
-              'fruitLove',
-              JSON.stringify(
-                !parsedLove && !singleFruitLove
-                  ? [
-                      {
-                        id: fruitFound.id,
-                        appreciation: 'like',
-                      },
-                    ]
-                  : [
-                      ...parsedLove.filter(
-                        (appreciationValue) =>
-                          appreciationValue.id !== fruitFound?.id,
-                      ),
-                      {
-                        id: fruitFound.id,
-                        appreciation:
-                          singleFruitLove?.appreciation !== 'like'
-                            ? 'like'
-                            : 'dislike',
-                      },
-                    ],
-              ),
-            );
-          }}
-        >
-          {singleFruitAppreciation?.appreciation !== 'like'
-            ? 'like'
-            : 'dislike'}
-        </button>
+        <input
+          readOnly
+          hidden={true}
+          value={params.fruitName}
+          name="fruit-name"
+        />
+        <textarea
+          name="fruit-appreciation"
+          defaultValue={singleFruitAppreciation?.appreciation}
+        />
+        <button formAction={setFruitNote}>Update Opinion</button>
       </form>
     </>
   );
