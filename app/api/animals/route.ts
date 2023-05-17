@@ -2,11 +2,11 @@ import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import {
-  Animal,
   createAnimal,
   getAnimalsWithLimitAndOffset,
 } from '../../../database/animals';
 import { getUserBySessionToken } from '../../../database/users';
+import { Animal } from '../../../migrations/1675675178-createTableAnimals';
 import { validateTokenAgainstSecret } from '../../../util/csrf';
 
 const animalSchema = z.object({

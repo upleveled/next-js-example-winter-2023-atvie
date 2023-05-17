@@ -1,7 +1,7 @@
 'use client';
 // import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Animal } from '../../../database/animals';
+import { Animal } from '../../../migrations/1675675178-createTableAnimals';
 
 type Props = {
   animals: Animal[];
