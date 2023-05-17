@@ -1,21 +1,19 @@
 import Link from 'next/link';
 import { fruits } from '../../database/fruits';
-import { getCookieByName } from '../../util/cookies';
+import { getCookie } from '../../util/cookies';
+import { parseJson } from '../../util/json';
 
 export const metadata = {
   title: 'Fruits',
   description: 'This is my Fruits Page',
 };
 
-// we add this only if we have no dynamic function as cookies or headers
-export const dynamic = 'force-dynamic';
-export const revalidate = false;
-
 export default function FruitsPage() {
   // get the cookie from the server
-  const fruitCommentsCookie = getCookieByName('fruitComments');
-  const fruitComments = Array.isArray(fruitCommentsCookie)
-    ? fruitCommentsCookie
+  const fruitCommentsParsed = parseJson(getCookie('fruitComments'));
+
+  const fruitComments = Array.isArray(fruitCommentsParsed)
+    ? fruitCommentsParsed
     : [];
 
   const fruitsWithComments = fruits.map((fruit) => {

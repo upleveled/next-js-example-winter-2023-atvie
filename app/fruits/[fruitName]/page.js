@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { getFruitByName } from '../../../database/fruits';
-import { getCookieByName } from '../../../util/cookies';
+import { getCookie } from '../../../util/cookies';
+import { parseJson } from '../../../util/json';
 import { rootNotFoundMetadata } from '../../not-found';
 import FruitCommentForm from './FruitCommentForm';
 
@@ -13,15 +14,15 @@ import FruitCommentForm from './FruitCommentForm';
 // ];
 
 export function generateMetadata({ params }) {
-  const singleFruit = getFruitByName(params.fruitName);
+  const fruit = getFruitByName(params.fruitName);
 
-  if (!singleFruit) {
+  if (!fruit) {
     return rootNotFoundMetadata;
   }
 
   return {
-    title: singleFruit.name,
-    description: `Single fruit page for ${singleFruit.name}`,
+    title: fruit.name,
+    description: `Single fruit page for ${fruit.name}`,
   };
 }
 
@@ -29,20 +30,20 @@ export function generateMetadata({ params }) {
 export const dynamic = 'force-dynamic';
 
 export default function FruitPage({ params }) {
-  const singleFruit = getFruitByName(params.fruitName);
+  const fruit = getFruitByName(params.fruitName);
 
-  if (!singleFruit) {
+  if (!fruit) {
     notFound();
   }
 
-  let fruitCommentsCookie = getCookieByName('fruitComments');
+  const fruitCommentsParsed = parseJson(getCookie('fruitComments'));
 
-  if (!Array.isArray(fruitCommentsCookie)) {
-    fruitCommentsCookie = [];
-  }
+  const currentComments = Array.isArray(fruitCommentsParsed)
+    ? fruitCommentsParsed
+    : [];
 
-  const singleFruitComment = fruitCommentsCookie.find(
-    (fruitComment) => fruitComment.id === singleFruit.id,
+  const fruitComment = currentComments.find(
+    (singleFruitComment) => singleFruitComment.id === fruit.id,
   );
 
   return (
@@ -53,12 +54,12 @@ export default function FruitPage({ params }) {
           whiteSpace: 'pre-line',
         }}
       >
-        {singleFruitComment?.comment ||
+        {fruitComment?.comment ||
           `Please type something about the ${params.fruitName}`}
       </span>
       <FruitCommentForm
-        fruitComment={singleFruitComment?.comment || ''}
-        fruitId={singleFruit.id}
+        fruitComment={fruitComment?.comment || ''}
+        fruitId={fruit.id}
       />
     </>
   );

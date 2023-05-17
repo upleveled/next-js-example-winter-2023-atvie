@@ -1,44 +1,15 @@
 import cookie from 'cookie';
-import Cookies from 'js-cookie';
 import { cookies } from 'next/headers';
-
-// more robust way to get items from cookies without parsing all the time
-export function getCookieByName(name: string): CookieValue | undefined {
-  const cookieValue = cookies().get(name)?.value;
-
-  if (!cookieValue) {
-    return undefined;
-  }
-
-  // TODO: remove parsing
-  try {
-    return JSON.parse(cookieValue); // Type should be a string
-  } catch (err) {
-    return undefined;
-  }
-}
 
 export type CookieValue = {
   id: number;
   comment: string;
 }[];
 
-// delete starting here
-
-// more robust way to set items to set the cookie without stringify all the time
-export function setStringifiedCookie(key: string, value: CookieValue) {
-  Cookies.set(key, JSON.stringify(value));
+// more robust way to get items from cookies without parsing all the time
+export function getCookie(name: string): string {
+  return cookies().get(name)?.value || '[]';
 }
-
-export function deleteCookie(key: string) {
-  Cookies.remove(key);
-}
-
-export function stringifyCookieValue(value: CookieValue) {
-  return JSON.stringify(value);
-}
-
-// delete ending here
 
 export function createSerializedRegisterSessionTokenCookie(token: string) {
   // in the deployed version we want our cookie to be sent only under HTTPS

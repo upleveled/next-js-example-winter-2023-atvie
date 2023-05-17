@@ -37,6 +37,9 @@ dependencies:
   sass:
     specifier: ^1.57.1
     version: 1.58.3
+  secure-json-parse:
+    specifier: ^2.7.0
+    version: 2.7.0
   sharp:
     specifier: ^0.31.3
     version: 0.31.3
@@ -5952,6 +5955,10 @@ packages:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
     dependencies:
       loose-envify: 1.4.0
+    dev: false
+
+  /secure-json-parse@2.7.0:
+    resolution: {integrity: sha512-6aU+Rwsezw7VR8/nyvKTx8QpWH9FrcYiXXlqC4z5d5XQBDRqtbfsRjnwGyqbi3gddNtWHuEk9OANUotL26qKUw==}
     dev: false
 
   /semver@5.7.1:

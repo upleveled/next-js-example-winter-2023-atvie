@@ -1,25 +1,26 @@
 'use server';
 
 import { cookies } from 'next/headers';
-import { getCookieByName } from '../../../util/cookies';
+import { getCookie } from '../../../util/cookies';
+import { parseJson } from '../../../util/json';
 
 export async function createComment(fruitId, comment) {
-  const fruitComments = getCookieByName('fruitComments');
+  const fruitCommentsParsed = parseJson(getCookie('fruitComments'));
 
-  const currentComments = Array.isArray(fruitComments)
-    ? fruitComments.filter((fruitComment) => fruitComment.id !== fruitId)
+  const currentComments = Array.isArray(fruitCommentsParsed)
+    ? fruitCommentsParsed.filter((fruitComment) => fruitComment.id !== fruitId)
     : [];
 
-  await cookies()
-    .set(
-      'fruitComments',
-      JSON.stringify([
+  await cookies().set(
+    'fruitComments',
+    JSON.stringify(
+      [
         ...currentComments,
         {
           id: fruitId,
           comment,
         },
-      ]),
-    )
-    .sort((commentA, commentB) => commentA.id - commentB.id);
+      ].sort((commentA, commentB) => commentA.id - commentB.id),
+    ),
+  );
 }
