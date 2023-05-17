@@ -151,7 +151,3 @@ export const deleteAnimalById = cache(async (id: number) => {
   `;
   return animal;
 });
-
-export const preload = (id: number) => {
-  void getAnimalById(id).catch(() => void 0);
-};
