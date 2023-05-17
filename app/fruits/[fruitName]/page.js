@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { getFruitByName } from '../../../database/fruits';
 import { getCookieByName } from '../../../util/cookies';
 import { rootNotFoundMetadata } from '../../not-found';
-import ActionFromClient from './ActionFromClient';
+import FruitCommentForm from './FruitCommentForm';
 
 // export const fruits = [
 //   { id: 1, name: 'Banana', icon: '🍌' },
@@ -35,30 +35,30 @@ export default function FruitPage({ params }) {
     notFound();
   }
 
-  let fruitNotesCookie = getCookieByName('fruitNotes');
+  let fruitCommentsCookie = getCookieByName('fruitComments');
 
-  if (!Array.isArray(fruitNotesCookie)) {
-    fruitNotesCookie = [];
+  if (!Array.isArray(fruitCommentsCookie)) {
+    fruitCommentsCookie = [];
   }
 
-  const singleFruitNote = fruitNotesCookie.find(
-    (fruitNote) => fruitNote.id === singleFruit.id,
+  const singleFruitComment = fruitCommentsCookie.find(
+    (fruitComment) => fruitComment.id === singleFruit.id,
   );
 
   return (
     <>
       <h1>{params.fruitName}</h1>
-      <p
+      <span
         style={{
           whiteSpace: 'pre-line',
         }}
       >
-        {singleFruitNote?.note ||
+        {singleFruitComment?.comment ||
           `Please type something about the ${params.fruitName}`}
-      </p>
-      <ActionFromClient
-        fruitName={singleFruit.name}
-        fruitNote={singleFruitNote?.note || ''}
+      </span>
+      <FruitCommentForm
+        fruitComment={singleFruitComment?.comment || ''}
+        fruitId={singleFruit.id}
       />
     </>
   );

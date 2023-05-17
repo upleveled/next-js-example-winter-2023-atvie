@@ -13,28 +13,30 @@ export const revalidate = false;
 
 export default function FruitsPage() {
   // get the cookie from the server
-  const userFruitCookie = getCookieByName('fruitNotes');
-  const fruitNotes = Array.isArray(userFruitCookie) ? userFruitCookie : [];
+  const fruitCommentsCookie = getCookieByName('fruitComments');
+  const fruitComments = Array.isArray(fruitCommentsCookie)
+    ? fruitCommentsCookie
+    : [];
 
-  const fruitsWithNotes = fruits.map((fruit) => {
-    const fruitWithNote = { ...fruit, note: '' };
+  const fruitsWithComments = fruits.map((fruit) => {
+    const fruitWithComment = { ...fruit, comment: '' };
 
     // read the cookie and find the fruitNote
-    const fruitInCookie = fruitNotes.find(
+    const fruitInCookie = fruitComments.find(
       (fruitObject) => fruit.id === fruitObject.id,
     );
 
     // if find the fruit update the note
     if (fruitInCookie) {
-      fruitWithNote.note = fruitInCookie.note;
+      fruitWithComment.comment = fruitInCookie.comment;
     }
 
-    return fruitWithNote;
+    return fruitWithComment;
   });
 
   return (
     <div>
-      {fruitsWithNotes.map((fruit) => {
+      {fruitsWithComments.map((fruit) => {
         return (
           <div
             key={`fruit-${fruit.id}`}
@@ -43,7 +45,7 @@ export default function FruitsPage() {
             <Link href={`/fruits/${fruit.name.toLocaleLowerCase()}`}>
               <h2>{fruit.name}</h2>
               <p>{fruit.icon}</p>
-              <p>{fruit.note || 'n/a'}</p>
+              <p>{fruit.comment || 'n/a'}</p>
             </Link>
           </div>
         );

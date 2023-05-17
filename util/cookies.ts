@@ -20,7 +20,7 @@ export function getCookieByName(name: string): CookieValue | undefined {
 
 export type CookieValue = {
   id: number;
-  note: string;
+  comment: string;
 }[];
 
 // delete starting here
