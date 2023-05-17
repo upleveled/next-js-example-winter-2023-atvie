@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { getAnimalById } from '../../../database/animals';
+import { getAnimalById, preload } from '../../../database/animals';
 import { animalNotFoundMetadata } from './not-found';
 
 export const dynamic = 'force-dynamic';
@@ -26,6 +26,7 @@ type Props = {
 };
 
 export default async function AnimalPage(props: Props) {
+  preload(parseInt(props.params.animalId));
   const singleAnimal = await getAnimalById(parseInt(props.params.animalId));
 
   if (!singleAnimal) {

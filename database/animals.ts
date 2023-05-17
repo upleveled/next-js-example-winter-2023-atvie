@@ -1,3 +1,4 @@
+import 'server-only';
 import { cache } from 'react';
 import { sql } from './connect';
 
@@ -15,6 +16,10 @@ export type Animal = {
   firstName: string;
   type: string;
   accessory: string | null;
+};
+
+export const preload = (id: number) => {
+  void getAnimalById(id);
 };
 
 // get all animals
