@@ -4,9 +4,7 @@ import { getFruitByName } from '../database/fruits';
 import { getCookieByName } from './cookies';
 
 export async function setFruitNote(formData) {
-  console.log(formData.get('fruit-name'));
   const singleFruit = getFruitByName(formData.get('fruit-name'));
-  console.log(singleFruit);
 
   if (!singleFruit) return;
 
