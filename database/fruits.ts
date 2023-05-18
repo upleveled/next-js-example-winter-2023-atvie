@@ -12,7 +12,7 @@ export const fruits: Fruit[] = [
   { id: 5, name: 'Avocado', icon: '🥑' },
 ];
 
-export function getFruitById(id?: number) {
+export function getFruitById(id: number) {
   if (!id) return undefined;
 
   return fruits.find((fruit) => {
