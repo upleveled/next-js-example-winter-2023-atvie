@@ -18,6 +18,7 @@ export default function FruitCommentForm(props) {
       />
       <button
         formAction={async () => {
+          // This is a hack to reset Client Cache for all routes until revalidatePath() is fixed
           router.refresh();
           await createComment(props.fruitId, comment);
         }}
