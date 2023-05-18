@@ -30,7 +30,7 @@ export function generateMetadata({ params }) {
 export const dynamic = 'force-dynamic';
 
 export default function FruitPage({ params }) {
-  const fruit = getFruitById(params.fruitName);
+  const fruit = getFruitById(Number(params.fruitId));
 
   if (!fruit) {
     notFound();
