@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { createComment } from './actions';
+import { createOrUpdateComment } from './actions';
 
 export default function FruitCommentForm(props) {
   const [comment, setComment] = useState(props.fruitComment);
@@ -20,7 +20,7 @@ export default function FruitCommentForm(props) {
         formAction={async () => {
           // Temporary workaround until Next.js revalidatePath bug is fixed
           router.refresh();
-          await createComment(props.fruitId, comment);
+          await createOrUpdateComment(props.fruitId, comment);
         }}
       >
         Update Comment

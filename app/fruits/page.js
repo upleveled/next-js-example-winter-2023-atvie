@@ -24,7 +24,7 @@ export default function FruitsPage() {
 
     return {
       ...fruit,
-      comment: matchingFruitFromCookie.comment,
+      comment: matchingFruitFromCookie?.comment,
     };
   });
 
@@ -36,7 +36,7 @@ export default function FruitsPage() {
             key={`fruit-${fruit.id}`}
             data-test-id={`fruit-type-${fruit.name.toLocaleLowerCase()}`}
           >
-            <Link href={`/fruits/${fruit.name.toLocaleLowerCase()}`}>
+            <Link href={`/fruits/${fruit.id}`}>
               <h2>{fruit.name}</h2>
               <div>{fruit.icon}</div>
               <div>{fruit.comment}</div>
