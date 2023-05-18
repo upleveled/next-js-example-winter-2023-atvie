@@ -39,7 +39,7 @@ export default function FruitsPage() {
             <Link href={`/fruits/${fruit.name.toLocaleLowerCase()}`}>
               <h2>{fruit.name}</h2>
               <div>{fruit.icon}</div>
-              <div>{fruit.comment || ''}</div>
+              <div>{fruit.comment}</div>
             </Link>
           </div>
         );
