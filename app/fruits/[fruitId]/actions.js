@@ -5,7 +5,11 @@ import { getCookie } from '../../../util/cookies';
 import { parseJson } from '../../../util/json';
 
 export async function createOrUpdateComment(fruitId, comment) {
-  const fruitComments = parseJson(getCookie('fruitComments'));
+  const fruitCommentsCookie = getCookie('fruitComments');
+
+  const fruitComments = !fruitCommentsCookie
+    ? []
+    : parseJson(fruitCommentsCookie);
 
   const fruitToUpdate = fruitComments.find(
     (fruitComment) => fruitComment.id === fruitId,

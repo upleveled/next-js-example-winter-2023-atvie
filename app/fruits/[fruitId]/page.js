@@ -36,7 +36,11 @@ export default function FruitPage({ params }) {
     notFound();
   }
 
-  const fruitComments = parseJson(getCookie('fruitComments'));
+  const fruitCommentsCookie = getCookie('fruitComments');
+
+  const fruitComments = !fruitCommentsCookie
+    ? []
+    : parseJson(fruitCommentsCookie);
 
   const currentComments = Array.isArray(fruitComments) ? fruitComments : [];
 

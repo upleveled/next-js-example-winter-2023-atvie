@@ -10,7 +10,11 @@ export const metadata = {
 
 export default function FruitsPage() {
   // get the cookie from the server
-  const fruitComments = parseJson(getCookie('fruitComments'));
+  const fruitCommentsCookie = getCookie('fruitComments');
+
+  const fruitComments = !fruitCommentsCookie
+    ? []
+    : parseJson(fruitCommentsCookie);
 
   const currentComments = Array.isArray(fruitComments) ? fruitComments : [];
 
