@@ -27,7 +27,9 @@ export function generateMetadata({ params }) {
 }
 
 // we add this only if we have no dynamic function as cookies or headers
-export const dynamic = 'force-dynamic';
+//
+// TODO: only add this if absolutely needed during lecture
+// export const dynamic = 'force-dynamic';
 
 export default function FruitPage({ params }) {
   const fruit = getFruitById(Number(params.fruitId));
