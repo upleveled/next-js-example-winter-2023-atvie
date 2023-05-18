@@ -12,10 +12,10 @@ export const fruits: Fruit[] = [
   { id: 5, name: 'Avocado', icon: '🥑' },
 ];
 
-export function getFruitByName(name?: string) {
-  if (!name) return undefined;
+export function getFruitById(id?: number) {
+  if (!id) return undefined;
 
   return fruits.find((fruit) => {
-    return fruit.name.toLowerCase() === name.toLowerCase();
+    return fruit.id === id;
   });
 }

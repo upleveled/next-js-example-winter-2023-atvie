@@ -7,8 +7,8 @@ export type CookieValue = {
 }[];
 
 // more robust way to get items from cookies without parsing all the time
-export function getCookie(name: string): string {
-  return cookies().get(name)?.value || '[]';
+export function getCookie(name: string): string | undefined {
+  return cookies().get(name)?.value;
 }
 
 export function createSerializedRegisterSessionTokenCookie(token: string) {

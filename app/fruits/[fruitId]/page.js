@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getFruitByName } from '../../../database/fruits';
+import { getFruitByName as getFruitById } from '../../../database/fruits';
 import { getCookie } from '../../../util/cookies';
 import { parseJson } from '../../../util/json';
 import { rootNotFoundMetadata } from '../../not-found';
@@ -14,7 +14,7 @@ import FruitCommentForm from './FruitCommentForm';
 // ];
 
 export function generateMetadata({ params }) {
-  const fruit = getFruitByName(params.fruitName);
+  const fruit = getFruitById(Number(params.fruitId));
 
   if (!fruit) {
     return rootNotFoundMetadata;
@@ -30,7 +30,7 @@ export function generateMetadata({ params }) {
 export const dynamic = 'force-dynamic';
 
 export default function FruitPage({ params }) {
-  const fruit = getFruitByName(params.fruitName);
+  const fruit = getFruitById(params.fruitName);
 
   if (!fruit) {
     notFound();
@@ -38,9 +38,7 @@ export default function FruitPage({ params }) {
 
   const fruitComments = parseJson(getCookie('fruitComments'));
 
-  const currentComments = Array.isArray(fruitComments)
-    ? fruitComments
-    : [];
+  const currentComments = Array.isArray(fruitComments) ? fruitComments : [];
 
   const fruitComment = currentComments.find(
     (singleFruitComment) => singleFruitComment.id === fruit.id,
