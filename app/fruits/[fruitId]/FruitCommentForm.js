@@ -20,6 +20,7 @@ export default function FruitCommentForm(props) {
         formAction={async () => {
           // Temporary workaround until Next.js revalidatePath bug is fixed
           router.refresh();
+
           await createOrUpdateComment(props.fruitId, comment);
         }}
       >
