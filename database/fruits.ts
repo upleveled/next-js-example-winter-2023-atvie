@@ -11,3 +11,11 @@ export const fruits: Fruit[] = [
   { id: 4, name: 'Mango', icon: '🥭' },
   { id: 5, name: 'Avocado', icon: '🥑' },
 ];
+
+export function getFruitById(id: number) {
+  if (!id) return undefined;
+
+  return fruits.find((fruit) => {
+    return fruit.id === id;
+  });
+}
