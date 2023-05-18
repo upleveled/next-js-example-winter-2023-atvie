@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 import { getCookie } from '../../../util/cookies';
 import { parseJson } from '../../../util/json';
 
-export async function createComment(fruitId, comment) {
+export async function createOrUpdateComment(fruitId, comment) {
   const fruitComments = parseJson(getCookie('fruitComments'));
 
   if (!Array.isArray(fruitComments)) return;
