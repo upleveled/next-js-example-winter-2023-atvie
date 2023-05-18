@@ -7,7 +7,7 @@ import { parseJson } from '../../../util/json';
 export async function createComment(fruitId, comment) {
   const fruitComments = parseJson(getCookie('fruitComments'));
 
-  if (!fruitComments || !Array.isArray(fruitComments)) return;
+  if (!Array.isArray(fruitComments)) return;
 
   const fruitToUpdate = fruitComments.find(
     (fruitComment) => fruitComment.id === fruitId,
