@@ -17,19 +17,15 @@ export default function FruitsPage() {
     : parseJson(fruitCommentsCookie);
 
   const fruitsWithComments = fruits.map((fruit) => {
-    const fruitWithComment = { ...fruit };
-
     // read the cookie and find the fruitNote
-    const fruitInCookie = fruitComments.find(
+    const matchingFruitFromCookie = fruitComments.find(
       (fruitObject) => fruit.id === fruitObject.id,
     );
 
-    // if find the fruit update the note
-    if (fruitInCookie) {
-      fruitWithComment.comment = fruitInCookie.comment;
-    }
-
-    return fruitWithComment;
+    return {
+      ...fruit,
+      comment: matchingFruitFromCookie.comment,
+    };
   });
 
   return (
