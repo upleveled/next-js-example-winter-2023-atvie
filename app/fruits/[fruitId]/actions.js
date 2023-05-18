@@ -7,20 +7,20 @@ import { parseJson } from '../../../util/json';
 export async function createComment(fruitId, comment) {
   const fruitComments = parseJson(getCookie('fruitComments'));
 
-  const currentComments = Array.isArray(fruitComments)
-    ? fruitComments.filter((fruitComment) => fruitComment.id !== fruitId)
-    : [];
+  if (!fruitComments || !Array.isArray(fruitComments)) return;
 
-  await cookies().set(
-    'fruitComments',
-    JSON.stringify(
-      [
-        ...currentComments,
-        {
-          id: fruitId,
-          comment,
-        },
-      ].sort((commentA, commentB) => commentA.id - commentB.id),
-    ),
+  const fruitToUpdate = fruitComments.find(
+    (fruitComment) => fruitComment.id === fruitId,
   );
+
+  if (fruitToUpdate) {
+    fruitToUpdate.comment = comment;
+  } else {
+    fruitComments.push({
+      id: fruitId,
+      comment,
+    });
+  }
+
+  await cookies().set('fruitComments', JSON.stringify(fruitComments));
 }
