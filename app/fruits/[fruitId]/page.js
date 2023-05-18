@@ -42,9 +42,7 @@ export default function FruitPage({ params }) {
     ? []
     : parseJson(fruitCommentsCookie);
 
-  const currentComments = Array.isArray(fruitComments) ? fruitComments : [];
-
-  const fruitComment = currentComments.find(
+  const fruitComment = fruitComments.find(
     (singleFruitComment) => singleFruitComment.id === fruit.id,
   );
 
