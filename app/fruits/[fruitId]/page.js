@@ -47,14 +47,14 @@ export default function FruitPage({ params }) {
   return (
     <>
       <h1>{params.fruitName}</h1>
-      <span
+      <div
         style={{
           whiteSpace: 'pre-line',
         }}
       >
         {fruitComment?.comment ||
           `Please type something about the ${params.fruitName}`}
-      </span>
+      </div>
       <FruitCommentForm
         fruitComment={fruitComment?.comment || ''}
         fruitId={fruit.id}
