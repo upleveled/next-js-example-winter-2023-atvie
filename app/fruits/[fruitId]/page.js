@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getFruitByName as getFruitById } from '../../../database/fruits';
+import { getFruitById } from '../../../database/fruits';
 import { getCookie } from '../../../util/cookies';
 import { parseJson } from '../../../util/json';
 import { rootNotFoundMetadata } from '../../not-found';

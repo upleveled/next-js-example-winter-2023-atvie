@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 
 export type CookieValue = {
   id: number;
-  comment: string;
+  comment?: string;
 }[];
 
 // more robust way to get items from cookies without parsing all the time

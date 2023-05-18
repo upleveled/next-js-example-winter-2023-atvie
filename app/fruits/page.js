@@ -15,7 +15,7 @@ export default function FruitsPage() {
   const currentComments = Array.isArray(fruitComments) ? fruitComments : [];
 
   const fruitsWithComments = fruits.map((fruit) => {
-    const fruitWithComment = { ...fruit, comment: '' };
+    const fruitWithComment = { ...fruit };
 
     // read the cookie and find the fruitNote
     const fruitInCookie = currentComments.find(
