@@ -38,25 +38,27 @@ test('navigation test', async ({ page }) => {
   await page.getByRole('link', { name: 'Fruits' }).click();
   await expect(page).toHaveURL('http://localhost:3000/fruits');
 
-  await page.getByRole('link', { name: 'Banana 🍌 stars: 0' }).click();
-  await expect(page).toHaveURL('http://localhost:3000/fruits/banana');
+  await page.getByRole('link', { name: 'Banana 🍌' }).click();
+  await expect(page).toHaveURL('http://localhost:3000/fruits/1');
 
-  await expect(page.getByRole('heading', { name: 'Banana' })).toBeVisible();
+  await expect(
+    page.getByText('Please type something about the undefined'),
+  ).toBeVisible();
 
-  await page.getByRole('button', { name: '+ ⭐️' }).click({ clickCount: 3 });
+  await page.getByRole('textbox').click();
+  await page.getByRole('textbox').fill('test');
+  await page.getByRole('button', { name: 'Update Comment' }).click();
+
+  await expect(page.getByText('test')).toBeVisible();
 
   await page.getByRole('link', { name: 'Fruits' }).click();
   await expect(page).toHaveURL('http://localhost:3000/fruits');
 
   await expect(
-    page.locator('[data-test-id="fruit-type-banana"] >> p:nth-child(3)'),
-  ).toHaveText('stars: 3');
-
-  await expect(
-    page.getByRole('link', { name: 'Banana 🍌 stars: 3' }),
+    page.getByRole('link', { name: 'Banana 🍌 test' }),
   ).toBeVisible();
 
   await expect(page.getByTestId('fruit-type-banana')).toHaveText(
-    'Banana🍌stars: 3',
+    'Banana🍌test',
   );
 });
