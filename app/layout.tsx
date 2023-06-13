@@ -1,4 +1,5 @@
 import './global.scss';
+import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { getUserBySessionToken } from '../database/users';
@@ -55,9 +56,19 @@ export default async function RootLayout(props: Props) {
                 {user ? (
                   <>
                     {user.username}
-                    <Link href="/logout" prefetch={false}>
-                      logout
-                    </Link>
+                    <form>
+                      <button
+                        formAction={async () => {
+                          'use server';
+                          await cookies().set('sessionToken', '', {
+                            maxAge: -1,
+                          });
+                          revalidatePath('/');
+                        }}
+                      >
+                        logout
+                      </button>
+                    </form>
                   </>
                 ) : (
                   <>
