@@ -32,10 +32,11 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
 
         if (returnTo) {
           router.push(returnTo);
+          router.refresh();
           return;
         }
 
-        router.replace(`/profile/${data.user.username}`);
+        router.push(`/profile/${data.user.username}`);
         router.refresh();
       }}
     >
