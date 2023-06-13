@@ -32,11 +32,15 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
 
         if (returnTo) {
           router.push(returnTo);
+          // TODO: replace this fro revalidatePath() once the issue 50203 is fixed.
+          // - https://github.com/vercel/next.js/issues/50203
           router.refresh();
           return;
         }
 
         router.push(`/profile/${data.user.username}`);
+        // TODO: replace this fro revalidatePath() once the issue 50203 is fixed.
+        // - https://github.com/vercel/next.js/issues/50203
         router.refresh();
       }}
     >
