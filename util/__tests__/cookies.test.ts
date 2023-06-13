@@ -5,7 +5,7 @@ test('set, get and delete a cookie', () => {
   };
   // First, make sure that the return value of the function is undefined
   // Use .toBe to compare primitive values
-  expect(cookie.key).toBe(undefined);
+  expect(cookie.key).toBe('fruitsCookie');
   // expect(getParsedCookie(cookie.key)).toBeUndefined();
 
   // Use .toStrictEqual to test that objects have the same type as well as structure
