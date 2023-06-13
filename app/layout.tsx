@@ -3,6 +3,7 @@ import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { getUserBySessionToken } from '../database/users';
+import { logout } from './actions';
 import CookieBanner from './CookieBanner';
 import styles from './layout.module.scss';
 
@@ -57,17 +58,7 @@ export default async function RootLayout(props: Props) {
                   <>
                     {user.username}
                     <form>
-                      <button
-                        formAction={async () => {
-                          'use server';
-                          await cookies().set('sessionToken', '', {
-                            maxAge: -1,
-                          });
-                          revalidatePath('/');
-                        }}
-                      >
-                        logout
-                      </button>
+                      <button formAction={logout}>logout</button>
                     </form>
                   </>
                 ) : (

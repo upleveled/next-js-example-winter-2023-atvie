@@ -7,6 +7,15 @@ type Session = {
   csrfSecret: string;
 };
 
+export const deleteExpiredSessions = cache(async () => {
+  await sql`
+    DELETE FROM
+      sessions
+    WHERE
+      expiry_timestamp < now()
+  `;
+});
+
 export const createSession = cache(
   async (token: string, userId: number, csrfSecret: string) => {
     const [session] = await sql<{ id: number; token: string }[]>`
@@ -24,15 +33,6 @@ export const createSession = cache(
     return session;
   },
 );
-
-export const deleteExpiredSessions = cache(async () => {
-  await sql`
-    DELETE FROM
-      sessions
-    WHERE
-      expiry_timestamp < now()
-  `;
-});
 
 export const deleteSessionByToken = cache(async (token: string) => {
   const [session] = await sql<{ id: number; token: string }[]>`
