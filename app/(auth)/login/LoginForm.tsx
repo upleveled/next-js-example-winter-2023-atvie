@@ -32,15 +32,22 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
 
         if (returnTo) {
           router.push(returnTo);
-          // TODO: replace this fro revalidatePath() once the issue 50203 is fixed.
-          // - https://github.com/vercel/next.js/issues/50203
+
+          // router.refresh() is a temporary workaround to clear the whole client cache in Next.js
+          //
+          // TODO: Replace this with `revalidatePath(...)` when it works reliably
+          // See https://github.com/vercel/next.js/issues/49387#issuecomment-1548675224
           router.refresh();
+
           return;
         }
 
         router.push(`/profile/${data.user.username}`);
-        // TODO: replace this fro revalidatePath() once the issue 50203 is fixed.
-        // - https://github.com/vercel/next.js/issues/50203
+
+        // router.refresh() is a temporary workaround to clear the whole client cache in Next.js
+        //
+        // TODO: Replace this with `revalidatePath(...)` when it works reliably
+        // See https://github.com/vercel/next.js/issues/49387#issuecomment-1548675224
         router.refresh();
       }}
     >
