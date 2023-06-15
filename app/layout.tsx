@@ -2,6 +2,7 @@ import './global.scss';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { getUserBySessionToken } from '../database/users';
+import { logout } from './(auth)/logout/actions';
 import CookieBanner from './CookieBanner';
 import styles from './layout.module.scss';
 
@@ -55,9 +56,9 @@ export default async function RootLayout(props: Props) {
                 {user ? (
                   <>
                     {user.username}
-                    <Link href="/logout" prefetch={false}>
-                      logout
-                    </Link>
+                    <form>
+                      <button formAction={logout}>logout</button>
+                    </form>
                   </>
                 ) : (
                   <>
