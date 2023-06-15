@@ -22,5 +22,5 @@ export default async function AnimalManagementNaiveDontCopyLayout(
     redirect(`/login?returnTo=${headersList.get('x-pathname')}`);
   }
 
-  return props.children;›
+  return props.children;
 }
