@@ -1,4 +1,5 @@
 'use server';
+
 import { cookies } from 'next/headers';
 import { deleteSessionByToken } from '../../../database/sessions';
 
