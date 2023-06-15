@@ -7,9 +7,7 @@ export async function logout() {
   const cookieStore = cookies();
   const token = cookieStore.get('sessionToken');
 
-  if (token) {
-    await deleteSessionByToken(token.value);
-  }
+  if (token) await deleteSessionByToken(token.value);
 
   await cookies().set('sessionToken', '', {
     maxAge: -1,
