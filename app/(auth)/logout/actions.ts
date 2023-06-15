@@ -11,8 +11,6 @@ export async function logout() {
     await deleteSessionByToken(token.value);
   }
 
-  // use the method to delete cookies only available in server actions and Route Handlers.
-  // - https://nextjs.org/docs/app/api-reference/functions/cookies#cookiessetname-value-options
   await cookies().set('sessionToken', '', {
     maxAge: -1,
   });
