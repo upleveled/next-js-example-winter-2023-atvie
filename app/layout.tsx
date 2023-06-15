@@ -1,9 +1,8 @@
 import './global.scss';
-import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { getUserBySessionToken } from '../database/users';
-import { logout } from './actions';
+import { logout } from './(auth)/logout/actions';
 import CookieBanner from './CookieBanner';
 import styles from './layout.module.scss';
 
